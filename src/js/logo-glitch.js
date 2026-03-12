@@ -26,6 +26,13 @@ export function initLogoGlitch() {
     return;
   }
 
+  const reducedMotion =
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reducedMotion) {
+    return;
+  }
+
   let currentIndex = LOGO_PATHS.findIndex((path) => path === logoElement.getAttribute("src"));
   if (currentIndex < 0) {
     currentIndex = 0;

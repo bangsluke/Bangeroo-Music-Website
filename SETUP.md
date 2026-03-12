@@ -30,8 +30,8 @@
 
 ## Hero Media
 
-- Replace `public/images/hero/hero-placeholder.jpg` with your final fallback image.
-- Add your video as `public/images/hero/hero.mp4` for autoplay background.
+- Design A uses `public/images/hero/hero-image.jpg` as the hero background image.
+- Designs B, C, and D use `public/images/hero/hero-video.mp4` with `hero-image.jpg` as fallback/poster.
 
 ## Gallery Photos
 
@@ -40,7 +40,26 @@
 
 ## Contact Details
 
-- Edit `public/config/site-config.json`:
+- Edit `config/site-config.js`:
   - `contact.email` for the footer mailto link
   - `contact.telephone` for the footer tel link
   - `artist.bio` for hero bio text
+
+## A/B Design Variants
+
+- Design A: `/` (base style)
+- Design B: `/design-b.html` (glitch style active)
+- Design C: `/design-c.html` (hero video from `hero-video.mp4`)
+- Design D: `/design-d.html` (collage-style chaotic layout)
+- Use the hero left/right arrows to move between designs.
+
+## Chaos Effects Controls
+
+- Global randomized effects live in `src/js/chaos-effects.js`.
+- Scroll-trigger behavior is in `src/js/lazy-load.js`.
+- Design-specific effect styling lives in `src/css/variant-a.css`, `src/css/variant-b.css`, `src/css/variant-c.css`, and `src/css/variant-d.css`.
+- For accessibility, all high-intensity effects are reduced/disabled when `prefers-reduced-motion: reduce` is active.
+
+## Gallery Constraints
+
+- Gallery carousel is capped to `max-height: 90vh` across all designs.

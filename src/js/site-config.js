@@ -1,3 +1,5 @@
+import { siteConfig as rootSiteConfig } from "../../config/site-config.js";
+
 const DEFAULT_CONFIG = {
   contact: {
     email: "placeholder@email.com",
@@ -8,24 +10,18 @@ const DEFAULT_CONFIG = {
   }
 };
 
-export async function loadSiteConfig() {
-  try {
-    const response = await fetch("/config/site-config.json", { cache: "no-store" });
-    if (!response.ok) {
-      return DEFAULT_CONFIG;
+function mergeConfig(config) {
+  return {
+    contact: {
+      email: config?.contact?.email || DEFAULT_CONFIG.contact.email,
+      telephone: config?.contact?.telephone || DEFAULT_CONFIG.contact.telephone
+    },
+    artist: {
+      bio: config?.artist?.bio || DEFAULT_CONFIG.artist.bio
     }
+  };
+}
 
-    const config = await response.json();
-    return {
-      contact: {
-        email: config?.contact?.email || DEFAULT_CONFIG.contact.email,
-        telephone: config?.contact?.telephone || DEFAULT_CONFIG.contact.telephone
-      },
-      artist: {
-        bio: config?.artist?.bio || DEFAULT_CONFIG.artist.bio
-      }
-    };
-  } catch {
-    return DEFAULT_CONFIG;
-  }
+export async function loadSiteConfig() {
+  return mergeConfig(rootSiteConfig);
 }

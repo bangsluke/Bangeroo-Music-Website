@@ -12,9 +12,9 @@
     font-size: clamp(1rem, 1.8vw, 1.3rem);
   }
 
-  .splide__slide,
-  .placeholder-slide {
-    min-height: 24rem;
+  .splide__track,
+  .splide__list {
+    height: min(90vh, 42rem);
   }
 }
 

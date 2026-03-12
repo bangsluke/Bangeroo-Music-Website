@@ -65,6 +65,35 @@
   color: var(--color-text-secondary);
 }
 
+.hero-contact {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.hero-contact a {
+  display: inline-grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-secondary-soft);
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.hero-contact a:hover,
+.hero-contact a:focus-visible {
+  border-color: var(--color-accent-secondary);
+  transform: translateY(-2px);
+}
+
+.hero-contact svg {
+  width: 1.35rem;
+  height: 1.35rem;
+  fill: var(--color-text-primary);
+}
+
 .hero-logo {
   transition: opacity 100ms ease;
 }

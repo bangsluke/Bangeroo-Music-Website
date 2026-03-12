@@ -1,0 +1,74 @@
+.design-a {
+  background:
+    radial-gradient(circle at 12% 6%, rgba(255, 215, 0, 0.15), transparent 30%),
+    radial-gradient(circle at 80% 85%, rgba(19, 34, 87, 0.6), transparent 45%),
+    var(--color-bg-primary);
+}
+
+.design-a .hero-overlay {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.82)),
+    linear-gradient(120deg, rgba(255, 215, 0, 0.25), transparent 40%);
+}
+
+.design-a .hero-content {
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  transform: rotate(-0.8deg);
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.45);
+}
+
+.design-a #music .section-inner,
+.design-a #gallery .section-inner,
+.design-a #gigs .section-inner {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.58));
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.38);
+}
+
+.design-a #music .section-inner {
+  transform: translateX(-2vw);
+}
+
+.design-a #gallery .section-inner {
+  transform: translateX(2vw) rotate(0.6deg);
+}
+
+.design-a #gigs .section-inner {
+  transform: translateX(-1vw) rotate(-0.4deg);
+}
+
+.design-a .splide {
+  background: linear-gradient(
+    170deg,
+    rgba(255, 255, 255, 0.04),
+    rgba(19, 34, 87, 0.52),
+    rgba(0, 0, 0, 0.86)
+  );
+}
+
+.design-a .gig-button {
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.38);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .design-a.is-screen-chaos .hero-content {
+    animation: design-a-chaos-card 360ms ease-out;
+  }
+
+  @keyframes design-a-chaos-card {
+    0% {
+      transform: rotate(-0.8deg) scale(0.98);
+    }
+    55% {
+      transform: rotate(0.3deg) scale(1.02);
+    }
+    100% {
+      transform: rotate(-0.8deg) scale(1);
+    }
+  }
+}

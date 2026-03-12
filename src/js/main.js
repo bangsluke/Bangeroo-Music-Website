@@ -5,6 +5,7 @@ import { initAnalytics, trackEvent } from "./analytics.js";
 import { initGlitchEffects } from "./glitch.js";
 import { loadSiteConfig } from "./site-config.js";
 import { initLogoGlitch } from "./logo-glitch.js";
+import { initChaosEffects } from "./chaos-effects.js";
 
 function initSpotifyFallback() {
   const spotifyEmbed = document.querySelector("#spotify-embed");
@@ -60,11 +61,21 @@ function initHeroMediaFallback() {
 
 function applySiteConfig(config) {
   const bio = document.querySelector("#hero-bio");
+  const heroEmail = document.querySelector("#hero-email-link");
+  const heroPhone = document.querySelector("#hero-phone-link");
   const footerEmail = document.querySelector("#footer-email-link");
   const footerPhone = document.querySelector("#footer-phone-link");
 
   if (bio) {
     bio.textContent = config.artist.bio;
+  }
+
+  if (heroEmail) {
+    heroEmail.setAttribute("href", `mailto:${config.contact.email}`);
+  }
+
+  if (heroPhone) {
+    heroPhone.setAttribute("href", `tel:${config.contact.telephone}`);
   }
 
   if (footerEmail) {
@@ -86,6 +97,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   initEasterEgg();
   initGlitchEffects();
   initLogoGlitch();
+  initChaosEffects();
   initSpotifyFallback();
   initHeroMediaFallback();
 });

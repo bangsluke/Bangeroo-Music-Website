@@ -1,11 +1,14 @@
 import { Splide } from "@splidejs/splide";
 import "@splidejs/splide/css";
 
-const galleryImages = import.meta.glob("/public/images/gallery/*.{jpg,jpeg,png,webp,avif}", {
+const galleryImages = import.meta.glob(
+  "../../public/images/gallery/*.{jpg,jpeg,JPG,JPEG,png,PNG,webp,WEBP,avif,AVIF}",
+  {
   eager: true,
   query: "?url",
   import: "default"
-});
+  }
+);
 
 const placeholderGradients = [
   "linear-gradient(145deg, rgba(255, 0, 0, 0.7), rgba(19, 34, 87, 0.9))",
