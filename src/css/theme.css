@@ -1,0 +1,63 @@
+:root {
+  /* Raw palette (from colourScheme.txt) */
+  --palette-red: #ff0000;
+  --palette-black: #000000;
+  --palette-yellow: #ffd700;
+  --palette-grey: #a9a9a9;
+  --palette-white: #ffffff;
+  --palette-navy-blue: #132257;
+  --palette-mushroom: #bcaba0;
+
+  /* Semantic tokens */
+  --color-bg-primary: var(--palette-black);
+  --color-bg-secondary: var(--palette-navy-blue);
+  --color-bg-tertiary: var(--palette-mushroom);
+  --color-text-primary: var(--palette-white);
+  --color-text-secondary: var(--palette-grey);
+  --color-accent: var(--palette-red);
+  --color-accent-secondary: var(--palette-yellow);
+  --color-glitch-r: var(--palette-red);
+  --color-glitch-b: var(--palette-navy-blue);
+
+  /* Surface and effects */
+  --color-border: var(--palette-mushroom);
+  --color-overlay-dark: rgba(0, 0, 0, 0.55);
+  --color-shadow: rgba(0, 0, 0, 0.4);
+  --color-static-line: rgba(255, 255, 255, 0.04);
+  --color-overlay-red-soft: rgba(255, 0, 0, 0.2);
+  --color-overlay-blue-soft: rgba(19, 34, 87, 0.72);
+  --color-bg-secondary-soft: rgba(19, 34, 87, 0.35);
+  --color-bg-secondary-glass: rgba(19, 34, 87, 0.4);
+  --color-bg-black-strong: rgba(0, 0, 0, 0.8);
+  --color-bg-black-soft: rgba(0, 0, 0, 0.35);
+  --color-bg-mushroom-soft: rgba(188, 171, 160, 0.2);
+  --color-bg-red-strong: rgba(255, 0, 0, 0.7);
+  --color-bg-gold-strong: rgba(255, 215, 0, 0.7);
+  --color-noise-white: rgba(255, 255, 255, 0.08);
+  --color-noise-red: rgba(255, 0, 0, 0.06);
+
+  /* Spacing scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+  --space-2xl: 8rem;
+
+  /* Typography scale */
+  --font-family-heading: "system-ui", -apple-system, sans-serif;
+  --font-family-body: "system-ui", -apple-system, sans-serif;
+  --font-size-hero: clamp(3rem, 8vw, 7rem);
+  --font-size-h2: clamp(2rem, 5vw, 4rem);
+  --font-size-body: clamp(1rem, 2vw, 1.25rem);
+  --font-size-small: 0.875rem;
+
+  /* Motion and shape */
+  --glitch-duration: 3s;
+  --glitch-interval: 5s;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms ease;
+}

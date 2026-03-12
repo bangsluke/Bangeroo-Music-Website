@@ -1,0 +1,29 @@
+/* Base: mobile-first */
+.section-inner {
+  padding-inline: var(--space-sm);
+}
+
+@media (min-width: 768px) {
+  .hero {
+    padding-inline: var(--space-lg);
+  }
+
+  .hero-bio {
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
+  }
+
+  .splide__slide,
+  .placeholder-slide {
+    min-height: 24rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-inner {
+    padding-inline: 0;
+  }
+
+  #spotify-embed {
+    height: 352px;
+  }
+}

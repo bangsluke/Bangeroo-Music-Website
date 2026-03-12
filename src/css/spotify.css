@@ -1,0 +1,34 @@
+.music {
+  padding-top: var(--space-xl);
+}
+
+.spotify-embed-wrapper {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+}
+
+.spotify-embed-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-bg-secondary);
+  mix-blend-mode: hue;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+#spotify-embed {
+  display: block;
+}
+
+.spotify-fallback {
+  margin-top: var(--space-md);
+  color: var(--color-text-secondary);
+}
+
+.spotify-fallback a {
+  color: var(--color-accent-secondary);
+}

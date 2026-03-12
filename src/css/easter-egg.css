@@ -1,0 +1,30 @@
+.gigs {
+  padding-top: var(--space-lg);
+}
+
+.gig-button {
+  border: 1px solid var(--color-border);
+  background: linear-gradient(
+    140deg,
+    var(--color-bg-mushroom-soft),
+    var(--color-bg-secondary-glass)
+  );
+  color: var(--color-text-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--space-lg);
+  cursor: pointer;
+  transition: transform var(--transition-fast), border-color var(--transition-fast),
+    filter var(--transition-fast);
+}
+
+.gig-button:hover,
+.gig-button:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--color-accent-secondary);
+}
+
+.gig-button.revealed {
+  filter: blur(0.3px) contrast(1.08);
+  border-color: var(--color-accent);
+  text-shadow: 1px 0 var(--color-glitch-r), -1px 0 var(--color-glitch-b);
+}
