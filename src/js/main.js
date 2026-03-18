@@ -6,31 +6,32 @@ import { initGlitchEffects } from "./glitch.js";
 import { loadSiteConfig } from "./site-config.js";
 import { initLogoGlitch } from "./logo-glitch.js";
 import { initChaosEffects } from "./chaos-effects.js";
+import { initWaveformPlayer } from "./waveform-player.js";
+import { initTrackStories } from "./track-stories.js";
+import { initColourRandomiser } from "./colour-randomiser.js";
+import { initSpotifyNowPlaying } from "./spotify-now-playing.js";
+import { initVhsIntro } from "./vhs-intro.js";
+import { initLyricFragments } from "./lyric-fragments.js";
+import { initVisitorCounter } from "./visitor-counter.js";
+import { initGuestbook } from "./guestbook.js";
 
-function initDesignASectionNav() {
-  const isDesignA = document.body.classList.contains("design-a");
-  if (!isDesignA) {
-    return;
-  }
-
+function initSectionNav() {
   const navRoot = document.querySelector(".section-nav");
-  const toggleButton = document.querySelector(".section-nav__toggle");
-  const menu = document.querySelector("#section-nav-menu");
+  const toggleButton = document.querySelector(".nav-toggle");
+  const menu = document.querySelector(".nav-menu");
 
   if (!navRoot || !toggleButton || !menu) {
     return;
   }
 
   const closeMenu = () => {
+    menu.classList.remove("nav-menu--open");
     toggleButton.setAttribute("aria-expanded", "false");
-    toggleButton.setAttribute("aria-label", "Open menu");
-    menu.hidden = true;
   };
 
   const openMenu = () => {
+    menu.classList.add("nav-menu--open");
     toggleButton.setAttribute("aria-expanded", "true");
-    toggleButton.setAttribute("aria-label", "Close menu");
-    menu.hidden = false;
   };
 
   const isMenuOpen = () => toggleButton.getAttribute("aria-expanded") === "true";
@@ -93,6 +94,38 @@ function initDesignASectionNav() {
   });
 }
 
+function initHeaderBrandReveal() {
+  const headerBrand = document.querySelector("#header-brand");
+  const heroLogo = document.querySelector("#hero-logo");
+  if (!headerBrand) {
+    return;
+  }
+  if (!heroLogo) {
+    headerBrand.classList.remove("header-brand--hidden");
+    headerBrand.classList.add("header-brand--visible");
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          headerBrand.classList.add("header-brand--hidden");
+          headerBrand.classList.remove("header-brand--visible");
+          return;
+        }
+        headerBrand.classList.remove("header-brand--hidden");
+        headerBrand.classList.add("header-brand--visible");
+      });
+    },
+    {
+      root: null,
+      threshold: 0.15
+    }
+  );
+  observer.observe(heroLogo);
+}
+
 function initSpotifyFallback() {
   const spotifyEmbed = document.querySelector("#spotify-embed");
   const fallback = document.querySelector("#spotify-fallback");
@@ -151,6 +184,9 @@ function applySiteConfig(config) {
   const heroPhone = document.querySelector("#hero-phone-link");
   const footerEmail = document.querySelector("#footer-email-link");
   const footerPhone = document.querySelector("#footer-phone-link");
+  const spotifyEmbed = document.querySelector("#spotify-embed");
+  const spotifyFallbackLink = document.querySelector("#spotify-fallback-link");
+  const streamingLinks = document.querySelectorAll("[data-streaming-link]");
 
   if (bio) {
     bio.textContent = config.artist.bio;
@@ -161,7 +197,7 @@ function applySiteConfig(config) {
   }
 
   if (heroPhone) {
-    heroPhone.setAttribute("href", `tel:${config.contact.telephone}`);
+    heroPhone.setAttribute("href", `tel:${config.contact.phone}`);
   }
 
   if (footerEmail) {
@@ -169,8 +205,26 @@ function applySiteConfig(config) {
   }
 
   if (footerPhone) {
-    footerPhone.setAttribute("href", `tel:${config.contact.telephone}`);
+    footerPhone.setAttribute("href", `tel:${config.contact.phone}`);
   }
+
+  const artistId = config.spotifyEmbed.artistId;
+  const spotifyTheme = config.spotifyEmbed.theme;
+  const embedUrl = `https://open.spotify.com/embed/artist/${artistId}?utm_source=generator&theme=${spotifyTheme}`;
+  if (spotifyEmbed) {
+    spotifyEmbed.setAttribute("data-src", embedUrl);
+  }
+  if (spotifyFallbackLink) {
+    spotifyFallbackLink.setAttribute("href", config.streamingLinks.spotify);
+  }
+
+  streamingLinks.forEach((link) => {
+    const key = link.getAttribute("data-streaming-link");
+    if (!key || !config.streamingLinks[key]) {
+      return;
+    }
+    link.setAttribute("href", config.streamingLinks[key]);
+  });
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -186,5 +240,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   initChaosEffects();
   initSpotifyFallback();
   initHeroMediaFallback();
-  initDesignASectionNav();
+  initSectionNav();
+  initHeaderBrandReveal();
+  initWaveformPlayer(siteConfig);
+  initTrackStories();
+  initVhsIntro();
+  initLyricFragments(siteConfig);
+  initColourRandomiser(siteConfig);
+  initVisitorCounter(siteConfig);
+  initGuestbook(siteConfig);
+  initSpotifyNowPlaying(siteConfig);
 });
+
+export const __testables__ = {
+  initSectionNav,
+  applySiteConfig
+};

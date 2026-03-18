@@ -22,7 +22,7 @@ function pickNextIndex(currentIndex) {
 
 export function initLogoGlitch() {
   const logoElement = document.querySelector("#hero-logo");
-  if (!logoElement || LOGO_PATHS.length < 2) {
+  if (!(logoElement instanceof HTMLImageElement) || LOGO_PATHS.length < 2) {
     return;
   }
 

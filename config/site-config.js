@@ -1,9 +1,0 @@
-export const siteConfig = {
-  contact: {
-    email: "martinbangs@hotmail.com",
-    telephone: "+447903250331"
-  },
-  artist: {
-    bio: "Influenced by the raw energy of placeholder artists, The Bangs Collective brings angular grooves, restless textures, and late-night static to every track."
-  }
-};

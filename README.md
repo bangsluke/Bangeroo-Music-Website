@@ -1,30 +1,23 @@
 # Bangeroo
 
-Four-variant music showcase website for The Bangs Collective for A/B design testing.
+Single-page music showcase website for The Bangs Collective.
 
 ## Features
 
-- Four design variants with hero arrow navigation:
-  - Design A: `/`
-  - Design B (glitch): `/design-b.html`
-  - Design C (video-led): `/design-c.html`
-  - Design D (collage chaos): `/design-d.html`
-- Randomized chaos effects engine across all designs:
-  - screen shake pulses,
-  - text jitter/flicker bursts,
-  - character disappear/reappear glitches,
-  - design-specific scroll/reveal motion signatures.
-- Full-screen hero with logo, bio, and contact links.
-- Lazy-loaded Spotify artist embed with fallback link.
-- Auto-rotating Splide gallery with placeholder and empty-state handling (capped at 90vh).
-- Easter egg interaction that resets after 5 seconds.
-- Umami-ready event tracking hooks and Google Apps Script monthly report script.
+- Design C-based single-page layout with mobile section navigation.
+- Self-hosted waveform player (`wavesurfer.js`) using audio files from `public/songs/`.
+- Spotify embed retained in a dedicated `#spotify-player` section.
+- Streaming platform links (Spotify, SoundCloud, Apple Music, Amazon Music).
+- Gallery carousel (Splide) with fade transitions and desktop half-height treatment.
+- VHS intro, lyric fragments, palette randomizer, guestbook, visitor counter, and Spotify now-playing indicator.
 
 ## Tech Stack
 
 - Vite (vanilla JavaScript)
 - Vanilla HTML/CSS/JS (ES2022+)
 - Splide.js (carousel)
+- wavesurfer.js
+- Netlify Functions + Supabase backend integration
 - Umami analytics
 - Netlify static hosting
 
@@ -55,17 +48,9 @@ npm test
 
 ## Build-time Config
 
-- Edit contact and bio values in `config/site-config.js`.
-- This config is bundled at build time, so deploy after changes.
+- Main config: `src/config/site-config.js`
+- Track config: `src/config/track-data.js`
 
-## Revert to One Design
+## External Setup
 
-- Keep `src/index.html` only.
-- Remove `design-b.html`, `design-c.html`, and `design-d.html` from `vite.config.js` build inputs.
-- Remove the hero design arrows markup if no longer needed.
-
-## Chaos Tuning
-
-- JS runtime: `src/js/chaos-effects.js` (pulse frequency, randomization, character glitching).
-- Scroll reveal randomization: `src/js/lazy-load.js`.
-- Visual effect keyframes and class hooks: `src/css/base.css` and `src/css/variant-*.css`.
+- Follow `SETUP-GUIDE.md` for Supabase, Spotify, and Netlify environment setup.

@@ -1,0 +1,20 @@
+#lyric-fragments-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.lyric-fragment {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 260ms ease;
+  font-style: italic;
+  color: #ffffff;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
+  font-size: clamp(1rem, 2.4vw, 1.35rem);
+}
+
+.lyric-fragment.is-active {
+  opacity: 0.3;
+}

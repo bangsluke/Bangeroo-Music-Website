@@ -45,8 +45,9 @@
   --space-2xl: 8rem;
 
   /* Typography scale */
-  --font-family-heading: "system-ui", -apple-system, sans-serif;
+  --font-family-heading: "Audiowide", sans-serif;
   --font-family-body: "system-ui", -apple-system, sans-serif;
+  --font-family-terminal: "VT323", monospace;
   --font-size-hero: clamp(3rem, 8vw, 7rem);
   --font-size-h2: clamp(2rem, 5vw, 4rem);
   --font-size-body: clamp(1rem, 2vw, 1.25rem);
@@ -55,6 +56,8 @@
   /* Motion and shape */
   --glitch-duration: 3s;
   --glitch-interval: 5s;
+  --audio-intensity: 0;
+  --audio-bass: 0;
   --radius-sm: 0.5rem;
   --radius-md: 0.75rem;
   --radius-lg: 1.25rem;

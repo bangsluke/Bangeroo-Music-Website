@@ -2,7 +2,10 @@
   .glitch-text {
     position: relative;
     display: inline-block;
-    animation: glitch-skew var(--glitch-interval) infinite alternate-reverse;
+    animation: glitch-skew
+      calc(var(--glitch-interval) * (1 - var(--audio-intensity) * 0.35))
+      infinite
+      alternate-reverse;
   }
 
   .glitch-text::before,
@@ -20,13 +23,21 @@
   .glitch-text::before {
     color: var(--color-glitch-r);
     clip-path: inset(0 0 60% 0);
-    animation: glitch-top var(--glitch-duration) infinite linear alternate-reverse;
+    animation: glitch-top
+      calc(var(--glitch-duration) * (1 - var(--audio-intensity) * 0.5))
+      infinite
+      linear
+      alternate-reverse;
   }
 
   .glitch-text::after {
     color: var(--color-glitch-b);
     clip-path: inset(40% 0 0 0);
-    animation: glitch-bottom var(--glitch-duration) infinite linear alternate-reverse;
+    animation: glitch-bottom
+      calc(var(--glitch-duration) * (1 - var(--audio-intensity) * 0.5))
+      infinite
+      linear
+      alternate-reverse;
   }
 
   .scanlines {
@@ -34,7 +45,7 @@
     inset: 0;
     pointer-events: none;
     z-index: 5;
-    opacity: 0.3;
+    opacity: calc(0.2 + (var(--audio-intensity) * 0.3));
     background: repeating-linear-gradient(
       to bottom,
       transparent 0,
@@ -54,7 +65,7 @@
     background-image:
       radial-gradient(circle at 30% 60%, var(--color-noise-white), transparent 35%),
       radial-gradient(circle at 70% 25%, var(--color-noise-red), transparent 38%);
-    animation: static-burst 11s infinite;
+    animation: static-burst calc(11s - (var(--audio-bass) * 4s)) infinite;
   }
 
   @keyframes glitch-top {

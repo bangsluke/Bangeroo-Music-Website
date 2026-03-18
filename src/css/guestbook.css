@@ -1,0 +1,48 @@
+.guestbook {
+  padding-top: var(--space-lg);
+}
+
+.guestbook-form {
+  display: grid;
+  gap: 0.45rem;
+  margin-bottom: var(--space-md);
+}
+
+.guestbook-form textarea {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem;
+  resize: vertical;
+}
+
+.guestbook-form__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.guestbook-form button {
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: rgba(19, 34, 87, 0.22);
+  color: var(--color-text-primary);
+  padding: 0.4rem 0.9rem;
+  cursor: pointer;
+}
+
+.guestbook-wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-sm);
+}
+
+.guestbook-msg {
+  border: 1px dashed rgba(255, 255, 255, 0.26);
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0.6rem;
+  color: #9cffbe;
+  font-family: var(--font-family-terminal);
+}

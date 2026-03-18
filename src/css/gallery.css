@@ -26,6 +26,13 @@
   border-radius: var(--radius-sm);
   overflow: hidden;
   background: var(--color-bg-black-soft);
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+.splide__slide.is-active,
+.splide__slide.is-visible {
+  opacity: 1;
 }
 
 .splide__slide img {
@@ -44,4 +51,24 @@
 .gallery-empty {
   margin-top: var(--space-md);
   color: var(--color-text-secondary);
+}
+
+@media (min-width: 1024px) {
+  .gallery .splide {
+    height: auto;
+    width: min(100%, calc(50vh * 16 / 9));
+    max-height: none;
+    aspect-ratio: 1 / 1;
+    margin-inline: auto;
+    overflow: hidden;
+  }
+
+  .gallery .splide__track,
+  .gallery .splide__list,
+  .gallery .splide__slide,
+  .gallery .splide__slide img,
+  .gallery .placeholder-slide {
+    max-height: none;
+    height: 100%;
+  }
 }

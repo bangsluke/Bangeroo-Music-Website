@@ -21,6 +21,10 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="preload" href="/icons.svg" as="image" type="image/svg+xml" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Audiowide&family=VT323&display=swap"
+    />
     <title>Bangeroo | The Bangs Collective</title>
 
     <script
@@ -36,28 +40,47 @@
     <link rel="stylesheet" href="./css/spotify.css" />
     <link rel="stylesheet" href="./css/gallery.css" />
     <link rel="stylesheet" href="./css/easter-egg.css" />
+    <link rel="stylesheet" href="./css/waveform-player.css" />
+    <link rel="stylesheet" href="./css/vhs-intro.css" />
+    <link rel="stylesheet" href="./css/lyric-fragments.css" />
+    <link rel="stylesheet" href="./css/visitor-counter.css" />
+    <link rel="stylesheet" href="./css/guestbook.css" />
     <link rel="stylesheet" href="./css/responsive.css" />
-    <link rel="stylesheet" href="./css/variant-a.css" />
+    <link rel="stylesheet" href="./css/variant-c.css" />
   </head>
-  <body class="design design-a">
+  <body class="design design-c">
+    <div id="vhs-intro" aria-hidden="true">
+      <div class="vhs-intro__noise"></div>
+      <div class="vhs-intro__tracking"></div>
+      <p class="vhs-intro__label">TUNING BANGEROO...</p>
+    </div>
+    <div id="lyric-fragments-layer" aria-hidden="true"></div>
+    <div class="scanlines" aria-hidden="true"></div>
+    <div class="noise-flash" aria-hidden="true"></div>
 
     <header class="section-nav" aria-label="Section navigation">
-      <a class="section-nav__brand" href="#top" aria-label="Back to top">
+      <a
+        id="header-brand"
+        class="section-nav__brand logo-click-target header-brand--hidden"
+        href="#top"
+        aria-label="Back to top"
+      >
         <span class="section-nav__brand-top">BANG</span>
         <span class="section-nav__brand-bottom">EROO</span>
       </a>
 
-      <nav class="section-nav__links" aria-label="Page sections">
-        <a class="section-nav__link" href="#music" data-scroll-link>The Music</a>
-        <a class="section-nav__link" href="#gallery" data-scroll-link>Gallery</a>
-        <a class="section-nav__link" href="#gigs" data-scroll-link>Gigs</a>
+      <nav class="nav-links" aria-label="Page sections">
+        <a class="nav-link" href="#music" data-scroll-link>The Music</a>
+        <a class="nav-link" href="#gallery" data-scroll-link>Gallery</a>
+        <a class="nav-link" href="#gigs" data-scroll-link>Gigs</a>
+        <a class="nav-link" href="#guestbook" data-scroll-link>Shout Wall</a>
       </nav>
 
       <button
-        class="section-nav__toggle"
+        class="nav-toggle"
         type="button"
         aria-label="Open menu"
-        aria-controls="section-nav-menu"
+        aria-controls="site-nav-menu"
         aria-expanded="false"
       >
         <span aria-hidden="true"></span>
@@ -65,15 +88,47 @@
         <span aria-hidden="true"></span>
       </button>
 
-      <div id="section-nav-menu" class="section-nav__menu" hidden>
-        <a class="section-nav__menu-link" href="#music" data-scroll-link>The Music</a>
-        <a class="section-nav__menu-link" href="#gallery" data-scroll-link>Gallery</a>
-        <a class="section-nav__menu-link" href="#gigs" data-scroll-link>Gigs</a>
+      <div
+        class="nav-now-playing"
+        id="nav-now-playing"
+        title="Shows whether Bangeroo is currently online listening to Spotify."
+        aria-label="Shows whether Bangeroo is currently online listening to Spotify."
+      >
+        <span class="nav-now-playing__spotify-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="img">
+            <path
+              d="M17.3 10.2a.8.8 0 0 1-1.1.3 9.3 9.3 0 0 0-8.4-.8.8.8 0 1 1-.6-1.5 10.9 10.9 0 0 1 9.9.9.8.8 0 0 1 .2 1.1zm1.6-2.9a1 1 0 0 1-1.4.3 12.4 12.4 0 0 0-11.3-1 1 1 0 1 1-.7-1.9 14.4 14.4 0 0 1 13.1 1.2 1 1 0 0 1 .3 1.4zm-3.2 5.8a.7.7 0 0 1-1 .2 7.4 7.4 0 0 0-6.7-.7.7.7 0 0 1-.5-1.3 8.9 8.9 0 0 1 8 .8.7.7 0 0 1 .2 1z"
+              fill="currentColor"
+            />
+          </svg>
+        </span>
+        <span class="pulse-dot pulse-dot--offline" id="now-playing-dot"></span>
+        <div class="now-playing-text-wrap">
+          <span id="now-playing-text">MB Offline</span>
+        </div>
+      </div>
+
+      <div id="site-nav-menu" class="nav-menu">
+        <a class="nav-menu-link" href="#music" data-scroll-link>The Music</a>
+        <a class="nav-menu-link" href="#gallery" data-scroll-link>Gallery</a>
+        <a class="nav-menu-link" href="#gigs" data-scroll-link>Gigs</a>
+        <a class="nav-menu-link" href="#guestbook" data-scroll-link>Shout Wall</a>
       </div>
     </header>
 
     <header id="top" class="hero" aria-label="Hero section">
       <div class="hero-media">
+        <video
+          class="hero-video"
+          id="hero-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          poster="/images/hero/hero-image.jpg"
+        >
+          <source src="/images/hero/hero-video.mp4" type="video/mp4" />
+        </video>
         <img
           id="hero-fallback-image"
           class="hero-fallback-image"
@@ -84,15 +139,9 @@
       </div>
 
       <div class="hero-content">
-        <nav class="design-nav" aria-label="Site design navigation">
-          <a class="design-arrow" href="./design-d.html" aria-label="Go to design D"
-            >&larr;</a
-          >
-          <span class="design-label">Design A</span>
-          <a class="design-arrow" href="./design-b.html" aria-label="Go to design B"
-            >&rarr;</a
-          >
-        </nav>
+        <h1 class="hero-logo glitch-text logo-click-target" id="hero-logo" data-text="BANGEROO">
+          BANGEROO
+        </h1>
         <p class="hero-bio" id="hero-bio">
           Influenced by the raw energy of placeholder artists, The Bangs Collective
           brings angular grooves, restless textures, and late-night static to every
@@ -131,33 +180,50 @@
       <section id="music" class="music lazy-section" aria-labelledby="music-title">
         <div class="section-inner">
           <h2 id="music-title" class="glitch-text" data-text="The Music">The Music</h2>
-          <div class="spotify-embed-wrapper">
-            <iframe
-              id="spotify-embed"
-              title="Spotify artist embed for The Bangs Collective"
-              data-src="https://open.spotify.com/embed/artist/0gXu1oMsNf8fnRY0NPCoSw?utm_source=generator&theme=0"
-              width="100%"
-              height="352"
-              frameborder="0"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy"
-            ></iframe>
-          </div>
-          <p id="spotify-fallback" class="spotify-fallback hidden">
-            Spotify embed unavailable.
+          <div id="waveform-player"></div>
+        </div>
+      </section>
+
+      <section id="streaming-links" class="streaming-links lazy-section" aria-label="Streaming links">
+        <div class="section-inner">
+          <div class="streaming-links__row">
             <a
-              href="https://open.spotify.com/artist/0gXu1oMsNf8fnRY0NPCoSw"
+              data-streaming-link="spotify"
+              class="streaming-link"
               target="_blank"
               rel="noreferrer"
-              data-umami-event="spotify-fallback-click"
+              aria-label="Open Spotify"
             >
-              Listen on Spotify
+              <img src="./assets/icons/spotify.svg" alt="" />
             </a>
-          </p>
-          <p class="spotify-availability">
-            All Bangeroo tracks are available through Spotify, iTunes, Amazon Music and many other
-            music outlets. You can't use that as an excuse then.
-          </p>
+            <a
+              data-streaming-link="soundcloud"
+              class="streaming-link"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Open SoundCloud"
+            >
+              <img src="./assets/icons/soundcloud.svg" alt="" />
+            </a>
+            <a
+              data-streaming-link="itunes"
+              class="streaming-link"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Open Apple Music"
+            >
+              <img src="./assets/icons/itunes.svg" alt="" />
+            </a>
+            <a
+              data-streaming-link="amazonMusic"
+              class="streaming-link"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Open Amazon Music"
+            >
+              <img src="./assets/icons/amazon-music.svg" alt="" />
+            </a>
+          </div>
         </div>
       </section>
 
@@ -188,9 +254,25 @@
           </button>
         </div>
       </section>
+
+      <section id="guestbook" class="guestbook lazy-section" aria-labelledby="guestbook-title">
+        <div class="section-inner">
+          <h2 id="guestbook-title" class="glitch-text" data-text="Shout Wall">Shout Wall</h2>
+          <form id="guestbook-form" class="guestbook-form">
+            <label for="guestbook-input">Leave a message</label>
+            <textarea id="guestbook-input" maxlength="100" rows="3"></textarea>
+            <div class="guestbook-form__meta">
+              <small id="guestbook-count">0/100</small>
+              <button type="submit">Shout</button>
+            </div>
+          </form>
+          <div id="guestbook-wall" class="guestbook-wall" aria-live="polite"></div>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer lazy-section">
+      <small class="site-footer__label">Bangeroo - The Bangs Collective</small>
       <div class="footer-contact" aria-label="Contact links">
         <a
           id="footer-email-link"
@@ -217,7 +299,7 @@
           </svg>
         </a>
       </div>
-      <small>Bangeroo - The Bangs Collective</small>
+      <div class="visitor-counter" id="visitor-counter">You are visitor #...</div>
     </footer>
 
     <script type="module" src="./js/main.js"></script>

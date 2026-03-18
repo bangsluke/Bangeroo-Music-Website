@@ -12,10 +12,7 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        index: path.resolve(__dirname, "src/index.html"),
-        designB: path.resolve(__dirname, "src/design-b.html"),
-        designC: path.resolve(__dirname, "src/design-c.html"),
-        designD: path.resolve(__dirname, "src/design-d.html")
+        index: path.resolve(__dirname, "src/index.html")
       }
     }
   },

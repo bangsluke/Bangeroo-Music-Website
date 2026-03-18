@@ -9,6 +9,7 @@ body {
 body {
   position: relative;
   overflow-x: hidden;
+  transition: background-color 300ms ease, color 300ms ease;
 }
 
 body.is-chaos-enabled .chaos-char {
@@ -289,14 +290,17 @@ main {
   color: var(--color-text-secondary);
   font-size: var(--font-size-small);
   padding: var(--space-lg) var(--space-md);
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
 }
 
 .footer-contact {
   display: flex;
-  justify-content: center;
   gap: var(--space-md);
-  margin-bottom: var(--space-sm);
+  align-items: center;
 }
 
 .footer-contact a {
@@ -320,6 +324,10 @@ main {
   width: 1.35rem;
   height: 1.35rem;
   fill: var(--color-text-primary);
+}
+
+.site-footer__label {
+  color: var(--color-text-secondary);
 }
 
 .hidden {

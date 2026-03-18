@@ -16,6 +16,8 @@
     "vitest": "^3.2.4"
   },
   "dependencies": {
-    "@splidejs/splide": "^4.1.4"
+    "@splidejs/splide": "^4.1.4",
+    "@supabase/supabase-js": "^2.99.2",
+    "wavesurfer.js": "^7.12.4"
   }
 }

@@ -40,24 +40,20 @@
 
 ## Contact Details
 
-- Edit `config/site-config.js`:
-  - `contact.email` for the footer mailto link
-  - `contact.telephone` for the footer tel link
+- Edit `src/config/site-config.js`:
+  - `contact.email` for mailto links
+  - `contact.phone` for tel links
   - `artist.bio` for hero bio text
 
-## A/B Design Variants
+## Design
 
-- Design A: `/` (base style)
-- Design B: `/design-b.html` (glitch style active)
-- Design C: `/design-c.html` (hero video from `hero-video.mp4`)
-- Design D: `/design-d.html` (collage-style chaotic layout)
-- Use the hero left/right arrows to move between designs.
+- Bangeroo now runs as a single-page Design C-based experience at `/`.
 
 ## Chaos Effects Controls
 
 - Global randomized effects live in `src/js/chaos-effects.js`.
 - Scroll-trigger behavior is in `src/js/lazy-load.js`.
-- Design-specific effect styling lives in `src/css/variant-a.css`, `src/css/variant-b.css`, `src/css/variant-c.css`, and `src/css/variant-d.css`.
+- Core effect styling lives in `src/css/variant-c.css`, `src/css/base.css`, and `src/css/glitch.css`.
 - For accessibility, all high-intensity effects are reduced/disabled when `prefers-reduced-motion: reduce` is active.
 
 ## Gallery Constraints

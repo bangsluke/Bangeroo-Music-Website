@@ -1,0 +1,11 @@
+.visitor-counter {
+  margin: 0 auto var(--space-sm);
+  width: fit-content;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  background: #121212;
+  color: #5cff96;
+  font-family: var(--font-family-terminal);
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.7rem;
+  box-shadow: inset 2px 2px 0 rgba(255, 255, 255, 0.15), inset -2px -2px 0 rgba(0, 0, 0, 0.45);
+}

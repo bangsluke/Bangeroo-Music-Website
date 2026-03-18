@@ -71,10 +71,11 @@ export function initGallery() {
     type: "loop",
     autoplay: true,
     interval: 3000,
-    pauseOnHover: true,
+    pauseOnHover: false,
+    pauseOnFocus: false,
     lazyLoad: "nearby",
     perPage: 1,
-    gap: "1rem",
+    gap: "0rem",
     arrows: true,
     pagination: true
   });
