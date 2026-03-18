@@ -32,3 +32,11 @@
 .spotify-fallback a {
   color: var(--color-accent-secondary);
 }
+
+.spotify-availability {
+  margin-top: var(--space-md);
+  color: var(--color-text-primary);
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  line-height: 1.5;
+  font-style: italic;
+}

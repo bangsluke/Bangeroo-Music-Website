@@ -41,6 +41,37 @@
   </head>
   <body class="design design-a">
 
+    <header class="section-nav" aria-label="Section navigation">
+      <a class="section-nav__brand" href="#top" aria-label="Back to top">
+        <span class="section-nav__brand-top">BANG</span>
+        <span class="section-nav__brand-bottom">EROO</span>
+      </a>
+
+      <nav class="section-nav__links" aria-label="Page sections">
+        <a class="section-nav__link" href="#music" data-scroll-link>The Music</a>
+        <a class="section-nav__link" href="#gallery" data-scroll-link>Gallery</a>
+        <a class="section-nav__link" href="#gigs" data-scroll-link>Gigs</a>
+      </nav>
+
+      <button
+        class="section-nav__toggle"
+        type="button"
+        aria-label="Open menu"
+        aria-controls="section-nav-menu"
+        aria-expanded="false"
+      >
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+
+      <div id="section-nav-menu" class="section-nav__menu" hidden>
+        <a class="section-nav__menu-link" href="#music" data-scroll-link>The Music</a>
+        <a class="section-nav__menu-link" href="#gallery" data-scroll-link>Gallery</a>
+        <a class="section-nav__menu-link" href="#gigs" data-scroll-link>Gigs</a>
+      </div>
+    </header>
+
     <header id="top" class="hero" aria-label="Hero section">
       <div class="hero-media">
         <img
@@ -62,12 +93,6 @@
             >&rarr;</a
           >
         </nav>
-        <img
-          id="hero-logo"
-          class="hero-logo"
-          src="/images/logos/Bangeroo-Logo-White-Text-Blue-Background.png"
-          alt="Bangeroo logo"
-        />
         <p class="hero-bio" id="hero-bio">
           Influenced by the raw energy of placeholder artists, The Bangs Collective
           brings angular grooves, restless textures, and late-night static to every
@@ -128,6 +153,10 @@
             >
               Listen on Spotify
             </a>
+          </p>
+          <p class="spotify-availability">
+            All Bangeroo tracks are available through Spotify, iTunes, Amazon Music and many other
+            music outlets. You can't use that as an excuse then.
           </p>
         </div>
       </section>

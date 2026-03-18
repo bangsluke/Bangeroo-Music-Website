@@ -82,6 +82,10 @@
   grid-column: 5 / -1;
 }
 
+.design-d #music .spotify-availability {
+  grid-column: 5 / -1;
+}
+
 .design-d #gigs .gig-button {
   justify-self: start;
 }

@@ -7,6 +7,92 @@ import { loadSiteConfig } from "./site-config.js";
 import { initLogoGlitch } from "./logo-glitch.js";
 import { initChaosEffects } from "./chaos-effects.js";
 
+function initDesignASectionNav() {
+  const isDesignA = document.body.classList.contains("design-a");
+  if (!isDesignA) {
+    return;
+  }
+
+  const navRoot = document.querySelector(".section-nav");
+  const toggleButton = document.querySelector(".section-nav__toggle");
+  const menu = document.querySelector("#section-nav-menu");
+
+  if (!navRoot || !toggleButton || !menu) {
+    return;
+  }
+
+  const closeMenu = () => {
+    toggleButton.setAttribute("aria-expanded", "false");
+    toggleButton.setAttribute("aria-label", "Open menu");
+    menu.hidden = true;
+  };
+
+  const openMenu = () => {
+    toggleButton.setAttribute("aria-expanded", "true");
+    toggleButton.setAttribute("aria-label", "Close menu");
+    menu.hidden = false;
+  };
+
+  const isMenuOpen = () => toggleButton.getAttribute("aria-expanded") === "true";
+
+  toggleButton.addEventListener("click", () => {
+    if (isMenuOpen()) {
+      closeMenu();
+      return;
+    }
+    openMenu();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") {
+      return;
+    }
+    if (isMenuOpen()) {
+      closeMenu();
+    }
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!isMenuOpen()) {
+      return;
+    }
+    if (event.target instanceof Node && navRoot.contains(event.target)) {
+      return;
+    }
+    closeMenu();
+  });
+
+  const smoothScrollToHash = (hash) => {
+    if (!hash || !hash.startsWith("#")) {
+      return false;
+    }
+    const target = document.querySelector(hash);
+    if (!(target instanceof HTMLElement)) {
+      return false;
+    }
+
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    history.pushState(null, "", hash);
+    return true;
+  };
+
+  document.addEventListener("click", (event) => {
+    const link = event.target instanceof Element ? event.target.closest("[data-scroll-link]") : null;
+    if (!link) {
+      return;
+    }
+
+    const href = link.getAttribute("href") || "";
+    if (!href.startsWith("#")) {
+      return;
+    }
+
+    event.preventDefault();
+    closeMenu();
+    smoothScrollToHash(href);
+  });
+}
+
 function initSpotifyFallback() {
   const spotifyEmbed = document.querySelector("#spotify-embed");
   const fallback = document.querySelector("#spotify-fallback");
@@ -100,4 +186,5 @@ document.addEventListener("DOMContentLoaded", async () => {
   initChaosEffects();
   initSpotifyFallback();
   initHeroMediaFallback();
+  initDesignASectionNav();
 });
