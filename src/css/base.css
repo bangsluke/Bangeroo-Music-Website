@@ -165,8 +165,8 @@ main {
     animation: design-b-noise 6s infinite steps(2);
   }
 
-  body.is-chaos-enabled.design-c .lazy-section.is-visible .section-inner {
-    animation: design-c-drift 9s ease-in-out infinite;
+  body.is-chaos-enabled.site .lazy-section.is-visible .section-inner {
+    animation: site-drift 9s ease-in-out infinite;
   }
 
   body.is-chaos-enabled.design-d .lazy-section.is-visible .section-inner {
@@ -207,7 +207,7 @@ main {
     }
   }
 
-  @keyframes design-c-drift {
+  @keyframes site-drift {
     0%,
     100% {
       transform: translateX(0);
@@ -289,18 +289,26 @@ main {
   border-top: 1px solid var(--color-border);
   color: var(--color-text-secondary);
   font-size: var(--font-size-small);
-  padding: var(--space-lg) var(--space-md);
+  padding: var(--space-sm) var(--space-md);
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: var(--space-md);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  text-align: center;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.9),
+    rgba(0, 0, 0, 0.98)
+  );
 }
 
 .footer-contact {
   display: flex;
   gap: var(--space-md);
   align-items: center;
+  justify-content: center;
 }
 
 .footer-contact a {

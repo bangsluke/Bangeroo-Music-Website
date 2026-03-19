@@ -8,13 +8,15 @@
 .lyric-fragment {
   position: absolute;
   opacity: 0;
-  transition: opacity 260ms ease;
+  transition: opacity 360ms ease;
   font-style: italic;
-  color: #ffffff;
-  text-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
+  color: #fff;
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.72),
+    0 0 22px rgba(255, 255, 255, 0.4);
   font-size: clamp(1rem, 2.4vw, 1.35rem);
 }
 
 .lyric-fragment.is-active {
-  opacity: 0.3;
+  opacity: 0.68;
 }

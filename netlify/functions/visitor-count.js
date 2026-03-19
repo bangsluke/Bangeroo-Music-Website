@@ -23,16 +23,16 @@ export async function handler(event) {
   }
 
   const supabase = createClient(supabaseUrl, supabaseServiceKey);
-  const { data, error } = await supabase.from("visitor_count").select("count").eq("id", 1).single();
+  const { data, error } = await supabase.from("visitor_count").select("count").eq("id", 1).maybeSingle();
   if (error) {
     return response(500, { error: error.message });
   }
 
-  const nextCount = Number(data?.count || 0) + 1;
+  const currentCount = Number(data?.count || 0);
+  const nextCount = currentCount + 1;
   const { error: updateError } = await supabase
     .from("visitor_count")
-    .update({ count: nextCount })
-    .eq("id", 1);
+    .upsert({ id: 1, count: nextCount }, { onConflict: "id" });
 
   if (updateError) {
     return response(500, { error: updateError.message });

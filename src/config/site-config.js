@@ -7,7 +7,7 @@ export const siteConfig = {
     bio: "Influenced by the raw energy of placeholder artists, The Bangs Collective brings angular grooves, restless textures, and late-night static to every track."
   },
   streamingLinks: {
-    spotify: "https://open.spotify.com/artist/PLACEHOLDER_ID",
+    spotify: "https://open.spotify.com/artist/0gXu1oMsNf8fnRY0NPCoSw",
     soundcloud: "https://soundcloud.com/PLACEHOLDER",
     itunes: "https://music.apple.com/artist/PLACEHOLDER",
     amazonMusic: "https://music.amazon.co.uk/artists/PLACEHOLDER"
@@ -56,6 +56,12 @@ export const siteConfig = {
     "I spin around your gravitational pull",
     "This is real"
   ],
+  lyricFragments: {
+    intervalMs: 9000,
+    varianceMs: 3600,
+    visibleDurationMs: 2700,
+    visibleVarianceMs: 600
+  },
   counterMilestones: {
     1: "You are the first. Legend.",
     10: "10 people have tuned in",
@@ -66,6 +72,7 @@ export const siteConfig = {
   },
   guestbook: {
     maxLength: 100,
+    cooldownSeconds: 5,
     readEndpoint: "/.netlify/functions/guestbook-read",
     writeEndpoint: "/.netlify/functions/guestbook-write"
   },

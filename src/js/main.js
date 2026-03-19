@@ -96,13 +96,36 @@ function initSectionNav() {
 
 function initHeaderBrandReveal() {
   const headerBrand = document.querySelector("#header-brand");
+  const headerNowPlaying = document.querySelector("#header-now-playing");
   const heroLogo = document.querySelector("#hero-logo");
+
+  const showHeaderItems = () => {
+    if (headerBrand) {
+      headerBrand.classList.remove("header-brand--hidden");
+      headerBrand.classList.add("header-brand--visible");
+    }
+    if (headerNowPlaying) {
+      headerNowPlaying.classList.remove("header-brand--hidden");
+      headerNowPlaying.classList.add("header-brand--visible");
+    }
+  };
+
+  const hideHeaderItems = () => {
+    if (headerBrand) {
+      headerBrand.classList.add("header-brand--hidden");
+      headerBrand.classList.remove("header-brand--visible");
+    }
+    if (headerNowPlaying) {
+      headerNowPlaying.classList.add("header-brand--hidden");
+      headerNowPlaying.classList.remove("header-brand--visible");
+    }
+  };
+
   if (!headerBrand) {
     return;
   }
   if (!heroLogo) {
-    headerBrand.classList.remove("header-brand--hidden");
-    headerBrand.classList.add("header-brand--visible");
+    showHeaderItems();
     return;
   }
 
@@ -110,12 +133,10 @@ function initHeaderBrandReveal() {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          headerBrand.classList.add("header-brand--hidden");
-          headerBrand.classList.remove("header-brand--visible");
+          hideHeaderItems();
           return;
         }
-        headerBrand.classList.remove("header-brand--hidden");
-        headerBrand.classList.add("header-brand--visible");
+        showHeaderItems();
       });
     },
     {
@@ -154,28 +175,49 @@ function initSpotifyFallback() {
 
 function initHeroMediaFallback() {
   const video = document.querySelector("#hero-video");
-  const fallbackImage = document.querySelector("#hero-fallback-image");
-  if (!video || !fallbackImage) {
+  const fallbackLayer = document.querySelector("#hero-fallback-layer");
+  if (!video || !fallbackLayer) {
     return;
   }
 
+  let resolved = false;
+
+  const showVideo = () => {
+    resolved = true;
+    fallbackLayer.classList.add("is-hidden");
+    video.classList.remove("is-hidden");
+  };
+
   const showImage = () => {
-    fallbackImage.classList.remove("is-hidden");
+    resolved = true;
+    fallbackLayer.classList.remove("is-hidden");
     video.classList.add("is-hidden");
   };
 
-  video.addEventListener("loadeddata", () => {
-    fallbackImage.classList.add("is-hidden");
-    video.classList.remove("is-hidden");
+  video.addEventListener("loadeddata", showVideo);
+  video.addEventListener("canplay", showVideo);
+
+  video.addEventListener("error", () => {
+    showImage();
   });
 
-  video.addEventListener("error", showImage);
-
-  // If autoplay is blocked or media missing, ensure the fallback remains visible.
+  // Try to start playback if allowed, but don't force image fallback on autoplay rejection.
   const playPromise = video.play();
   if (playPromise && typeof playPromise.catch === "function") {
-    playPromise.catch(showImage);
+    playPromise.catch(() => {});
   }
+
+  // If media never becomes playable, fall back after a short grace period.
+  window.setTimeout(() => {
+    if (resolved) {
+      return;
+    }
+    if (video.readyState >= 2) {
+      showVideo();
+      return;
+    }
+    showImage();
+  }, 3500);
 }
 
 function applySiteConfig(config) {

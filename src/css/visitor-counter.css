@@ -1,5 +1,5 @@
 .visitor-counter {
-  margin: 0 auto var(--space-sm);
+  margin: 0;
   width: fit-content;
   border: 2px solid rgba(255, 255, 255, 0.45);
   background: #121212;

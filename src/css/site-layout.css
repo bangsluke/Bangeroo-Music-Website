@@ -1,34 +1,34 @@
-.design-c .hero {
+.site .hero {
   align-items: center;
   justify-content: center;
   padding-top: calc(var(--space-lg) + 3.75rem);
   padding-bottom: var(--space-2xl);
 }
 
-.design-c .hero-media {
+.site .hero-media {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
 }
 
-.design-c main,
-.design-c .site-footer {
+.site main,
+.site .site-footer {
   position: relative;
   z-index: 1;
 }
 
-.design-c main {
+.site main {
   gap: var(--space-2xl);
 }
 
-.design-c .hero-overlay {
+.site .hero-overlay {
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.78)),
     radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.2), transparent 34%);
 }
 
-.design-c .hero-content {
+.site .hero-content {
   width: min(74rem, 100%);
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.5)),
@@ -37,14 +37,16 @@
   border-radius: var(--radius-lg);
   padding: var(--space-lg);
   row-gap: var(--space-md);
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-.design-c .hero-bio {
+.site .hero-bio {
   color: var(--palette-white);
   font-size: clamp(1rem, 1.9vw, 1.35rem);
 }
 
-.design-c .hero-logo {
+.site .hero-logo {
   font-family: var(--font-family-heading);
   font-size: clamp(3rem, 10vw, 8rem);
   letter-spacing: 0.15em;
@@ -54,9 +56,22 @@
   margin: 0;
   cursor: pointer;
   user-select: none;
+  display: grid;
+  justify-items: center;
+  gap: 0.06em;
 }
 
-.design-c .section-nav {
+.site .hero-logo-line {
+  display: block;
+  line-height: 0.92;
+}
+
+.site .hero-logo-line--top,
+.site .hero-logo-line--bottom {
+  letter-spacing: 0.14em;
+}
+
+.site .section-nav {
   --section-nav-height: 3.75rem;
   position: fixed;
   top: 0;
@@ -73,40 +88,40 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.design-c .section-nav__brand {
+.site .section-nav__brand {
   text-decoration: none;
   display: grid;
   line-height: 1;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   cursor: pointer;
-  margin-right: auto;
+  margin-right: 0;
   transition: opacity 240ms ease;
 }
 
-.design-c .section-nav__brand.header-brand--hidden {
+.site .header-brand--hidden {
   opacity: 0;
   pointer-events: none;
 }
 
-.design-c .section-nav__brand.header-brand--visible {
+.site .header-brand--visible {
   opacity: 1;
   pointer-events: auto;
 }
 
-.design-c .section-nav__brand-top,
-.design-c .section-nav__brand-bottom {
+.site .section-nav__brand-top,
+.site .section-nav__brand-bottom {
   font-family: var(--font-family-heading);
   font-size: 1.05rem;
 }
 
-.design-c .nav-links {
+.site .nav-links {
   display: none;
   align-items: center;
   gap: var(--space-sm);
 }
 
-.design-c .nav-link {
+.site .nav-link {
   text-decoration: none;
   font-size: var(--font-size-small);
   letter-spacing: 0.12em;
@@ -118,13 +133,13 @@
   transition: transform var(--transition-fast), border-color var(--transition-fast);
 }
 
-.design-c .nav-link:hover,
-.design-c .nav-link:focus-visible {
+.site .nav-link:hover,
+.site .nav-link:focus-visible {
   border-color: var(--color-accent-secondary);
   transform: translateY(-1px);
 }
 
-.design-c .nav-toggle {
+.site .nav-toggle {
   display: inline-grid;
   gap: 0.3rem;
   width: 2.5rem;
@@ -136,7 +151,7 @@
   cursor: pointer;
 }
 
-.design-c .nav-toggle span {
+.site .nav-toggle span {
   display: block;
   height: 2px;
   width: 100%;
@@ -144,7 +159,7 @@
   border-radius: 999px;
 }
 
-.design-c .nav-menu {
+.site .nav-menu {
   display: none;
   position: absolute;
   top: calc(100% + var(--space-sm));
@@ -160,11 +175,11 @@
   z-index: 110;
 }
 
-.design-c .nav-menu--open {
+.site .nav-menu--open {
   display: grid;
 }
 
-.design-c .nav-menu-link {
+.site .nav-menu-link {
   text-decoration: none;
   padding: 0.75rem 0.75rem;
   border-radius: var(--radius-sm);
@@ -174,20 +189,21 @@
   text-transform: uppercase;
 }
 
-.design-c .nav-menu-link:hover,
-.design-c .nav-menu-link:focus-visible {
+.site .nav-menu-link:hover,
+.site .nav-menu-link:focus-visible {
   border-color: rgba(255, 215, 0, 0.55);
   background: rgba(255, 215, 0, 0.08);
 }
 
-.design-c .nav-now-playing {
+.site .nav-now-playing {
   display: flex;
   align-items: center;
   gap: 0.45rem;
-  min-width: 9rem;
+  min-width: 0;
+  transition: opacity 240ms ease;
 }
 
-.design-c .now-playing-text-wrap {
+.site .now-playing-text-wrap {
   overflow: hidden;
   white-space: nowrap;
   width: auto;
@@ -195,31 +211,57 @@
   font-family: var(--font-family-heading);
 }
 
-.design-c .nav-now-playing__spotify-icon {
+.site .header-now-playing {
+  margin-right: auto;
+  width: fit-content;
+  max-width: fit-content;
+}
+
+.site .hero-now-playing {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  width: fit-content;
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(0, 0, 0, 0.35);
+  max-width: 100%;
+}
+
+.site .hero-now-playing .now-playing-text-wrap {
+  max-width: min(78vw, 34rem);
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.site .nav-now-playing__spotify-icon {
   display: inline-grid;
   place-items: center;
   color: #fff;
   opacity: 0.95;
 }
 
-.design-c .nav-now-playing__spotify-icon svg {
+.site .nav-now-playing__spotify-icon svg {
   width: 0.95rem;
   height: 0.95rem;
 }
 
-.design-c .pulse-dot {
+.site .pulse-dot {
   width: 0.55rem;
   height: 0.55rem;
   border-radius: 999px;
   background: #888;
 }
 
-.design-c .pulse-dot--online {
+.site .pulse-dot--online {
   background: #3ddc84;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .design-c .pulse-dot--online {
+  .site .pulse-dot--online {
     animation: pulse-dot 1.2s ease-in-out infinite;
   }
 }
@@ -237,11 +279,11 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .design-c.is-screen-chaos .hero-content {
-    animation: design-c-bloom 420ms ease-out;
+  .site.is-screen-chaos .hero-content {
+    animation: site-bloom 420ms ease-out;
   }
 
-  @keyframes design-c-bloom {
+  @keyframes site-bloom {
     0% {
       transform: scale(0.98);
       filter: brightness(1.25);
@@ -258,17 +300,17 @@
 }
 
 @media (min-width: 768px) {
-  .design-c .section-nav {
+  .site .section-nav {
     padding-inline: var(--space-lg);
   }
 
-  .design-c .nav-links {
+  .site .nav-links {
     display: inline-flex;
     margin-left: 0.5rem;
   }
 
-  .design-c .nav-toggle,
-  .design-c .nav-menu {
+  .site .nav-toggle,
+  .site .nav-menu {
     display: none !important;
   }
 }

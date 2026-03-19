@@ -11,10 +11,14 @@
   padding: var(--space-md);
   overflow: hidden;
   transition: box-shadow 180ms ease;
+  box-shadow: none;
+}
+
+.track-card.is-playing {
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, calc(0.08 + var(--audio-bass) * 0.2)),
-    0 0 calc(8px + (var(--audio-intensity) * 22px))
-      rgba(255, 255, 255, calc(0.1 + var(--audio-intensity) * 0.35));
+    0 0 0 2px rgba(255, 255, 255, calc(var(--audio-bass) * 3.5)),
+    0 0 calc(8px + (var(--audio-intensity) * 110px))
+      rgba(255, 255, 255, calc(var(--audio-intensity) * 3.2));
 }
 
 .track-card__head {
@@ -152,9 +156,15 @@
 }
 
 .streaming-link img {
-  height: 40px;
+  height: 80px;
   width: auto;
   display: block;
+}
+
+@media (max-width: 767px) {
+  .streaming-link img {
+    height: 40px;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

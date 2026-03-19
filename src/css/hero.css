@@ -14,7 +14,7 @@
 }
 
 .hero-video,
-.hero-fallback-image {
+.hero-fallback-layer {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -26,8 +26,14 @@
   display: none;
 }
 
-.hero-fallback-image.is-hidden {
+.hero-fallback-layer.is-hidden {
   display: none;
+}
+
+.hero-fallback-layer {
+  background:
+    radial-gradient(circle at 20% 20%, var(--color-accent), transparent 55%),
+    linear-gradient(160deg, #000000, var(--color-bg-secondary));
 }
 
 .hero-overlay {

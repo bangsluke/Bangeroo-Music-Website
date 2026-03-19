@@ -1,10 +1,11 @@
 {
   "name": "bangeroo",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:netlify": "npx netlify dev",
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run",

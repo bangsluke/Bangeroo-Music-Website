@@ -465,19 +465,19 @@ CREATE POLICY "Service role full access" ON visitor_count FOR ALL USING (true);
 **Prerequisites:** You must have a Spotify Premium account.
 
 1. Go to [developer.spotify.com/dashboard](https://developer.spotify.com/dashboard) and create a new app.
-2. Set the **Redirect URI** to `http://localhost:8888/callback` (used only during initial token generation).
+2. Set the **Redirect URI** to `http://127.0.0.1:8888/callback` (used only during initial token generation).
 3. Note down the **Client ID** and **Client Secret**.
 4. Generate a refresh token by running this one-time OAuth flow:
    - Open this URL in your browser (replace `YOUR_CLIENT_ID`):
      ```
-     https://accounts.spotify.com/authorize?client_id=YOUR_CLIENT_ID&response_type=code&redirect_uri=http://localhost:8888/callback&scope=user-read-currently-playing user-read-playback-state
+     https://accounts.spotify.com/authorize?client_id=YOUR_CLIENT_ID&response_type=code&redirect_uri=http://127.0.0.1:8888/callback&scope=user-read-currently-playing user-read-playback-state
      ```
-   - Approve the permissions. You will be redirected to `http://localhost:8888/callback?code=XXXXX`. Copy the `code` value from the URL.
+   - Approve the permissions. You will be redirected to `http://127.0.0.1:8888/callback?code=XXXXX`. Copy the `code` value from the URL.
    - Exchange the code for tokens by running this `curl` command (replace placeholders):
      ```bash
      curl -X POST https://accounts.spotify.com/api/token \
        -H "Content-Type: application/x-www-form-urlencoded" \
-       -d "grant_type=authorization_code&code=YOUR_CODE&redirect_uri=http://localhost:8888/callback&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET"
+       -d "grant_type=authorization_code&code=YOUR_CODE&redirect_uri=http://127.0.0.1:8888/callback&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET"
      ```
    - The response will include a `refresh_token`. **Save this securely - it does not expire.**
 5. Add the following environment variables to your Netlify site:

@@ -1,17 +1,13 @@
 const REVEAL_CLASS_MAP = {
-  "design-a": ["reveal-tilt", "reveal-float", "reveal-depth"],
-  "design-b": ["reveal-glitch", "reveal-slam", "reveal-jitter"],
-  "design-c": ["reveal-cinema", "reveal-drift", "reveal-veil"],
-  "design-d": ["reveal-collage", "reveal-warp", "reveal-burst"]
+  site: ["reveal-cinema", "reveal-drift", "reveal-veil"]
 };
 
 function getDesignKey() {
   const body = document.body;
   if (!body) {
-    return "design-a";
+    return "site";
   }
-  const designClass = [...body.classList].find((className) => className.startsWith("design-"));
-  return designClass || "design-a";
+  return body.classList.contains("site") ? "site" : "site";
 }
 
 function hashKey(input) {
@@ -37,7 +33,7 @@ function revealSection(target) {
   }
 
   const designKey = getDesignKey();
-  const revealSet = REVEAL_CLASS_MAP[designKey] || REVEAL_CLASS_MAP["design-a"];
+  const revealSet = REVEAL_CLASS_MAP[designKey] || REVEAL_CLASS_MAP.site;
   const identity = target.id || target.getAttribute("aria-labelledby") || "section";
   const deterministicClass = revealSet[hashKey(identity) % revealSet.length];
   const randomClass = randomFrom(revealSet);

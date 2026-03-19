@@ -31,6 +31,13 @@
   color: var(--color-text-primary);
   padding: 0.4rem 0.9rem;
   cursor: pointer;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+
+#guestbook-count {
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
 }
 
 .guestbook-wall {

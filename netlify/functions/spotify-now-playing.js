@@ -10,11 +10,47 @@ function response(statusCode, body) {
   };
 }
 
+function normalizeEnv(value) {
+  if (typeof value !== "string") {
+    return "";
+  }
+
+  const trimmed = value.trim();
+  if (
+    (trimmed.startsWith("\"") && trimmed.endsWith("\"")) ||
+    (trimmed.startsWith("'") && trimmed.endsWith("'"))
+  ) {
+    return trimmed.slice(1, -1).trim();
+  }
+  return trimmed;
+}
+
 async function getAccessToken() {
-  const clientId = process.env.SPOTIFY_CLIENT_ID;
-  const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
-  const refreshToken = process.env.SPOTIFY_REFRESH_TOKEN;
+  const rawClientId = process.env.SPOTIFY_CLIENT_ID;
+  const rawClientSecret = process.env.SPOTIFY_CLIENT_SECRET;
+  const rawRefreshToken = process.env.SPOTIFY_REFRESH_TOKEN;
+  const clientId = normalizeEnv(rawClientId);
+  const clientSecret = normalizeEnv(rawClientSecret);
+  const refreshToken = normalizeEnv(rawRefreshToken);
+
+  console.log("[spotify-now-playing] Env variable metadata", {
+    hasClientId: Boolean(clientId),
+    hasClientSecret: Boolean(clientSecret),
+    hasRefreshToken: Boolean(refreshToken),
+    clientIdLength: clientId.length,
+    clientSecretLength: clientSecret.length,
+    refreshTokenLength: refreshToken.length,
+    normalizedClientId: rawClientId !== clientId,
+    normalizedClientSecret: rawClientSecret !== clientSecret,
+    normalizedRefreshToken: rawRefreshToken !== refreshToken
+  });
+
   if (!clientId || !clientSecret || !refreshToken) {
+    console.log("[spotify-now-playing] Missing environment variables", {
+      hasClientId: Boolean(clientId),
+      hasClientSecret: Boolean(clientSecret),
+      hasRefreshToken: Boolean(refreshToken)
+    });
     throw new Error("Spotify environment variables are missing");
   }
 
@@ -33,14 +69,32 @@ async function getAccessToken() {
     body
   });
   if (!tokenResponse.ok) {
-    throw new Error("Failed to refresh Spotify token");
+    let tokenErrorBody = "";
+    try {
+      tokenErrorBody = await tokenResponse.text();
+    } catch {
+      tokenErrorBody = "";
+    }
+
+    console.log("[spotify-now-playing] Token refresh failed", {
+      status: tokenResponse.status,
+      body: tokenErrorBody
+    });
+    throw new Error(`Failed to refresh Spotify token (status ${tokenResponse.status})${tokenErrorBody ? `: ${tokenErrorBody}` : ""}`);
   }
   const tokenData = await tokenResponse.json();
+  console.log("[spotify-now-playing] Token refresh successful");
   return tokenData.access_token;
 }
 
 export async function handler(event) {
+  console.log("[spotify-now-playing] Request received", {
+    method: event.httpMethod,
+    path: event.path
+  });
+
   if (event.httpMethod !== "GET") {
+    console.log("[spotify-now-playing] Rejected method", { method: event.httpMethod });
     return response(405, { error: "Method not allowed" });
   }
 
@@ -56,24 +110,37 @@ export async function handler(event) {
     );
 
     if (currentlyPlayingResponse.status === 204) {
+      console.log("[spotify-now-playing] No active playback (204)");
       return response(200, { isPlaying: false });
     }
     if (!currentlyPlayingResponse.ok) {
+      console.log("[spotify-now-playing] currently-playing call failed", {
+        status: currentlyPlayingResponse.status
+      });
       return response(200, { isPlaying: false });
     }
 
     const payload = await currentlyPlayingResponse.json();
     if (!payload?.is_playing || !payload?.item) {
+      console.log("[spotify-now-playing] Payload indicates not playing");
       return response(200, { isPlaying: false });
     }
 
+    const trackName = payload.item.name;
+    const artistName = (payload.item.artists || []).map((artist) => artist.name).join(", ");
+    console.log("[spotify-now-playing] Active playback detected", {
+      track: trackName,
+      artist: artistName
+    });
+
     return response(200, {
       isPlaying: true,
-      track: payload.item.name,
-      artist: (payload.item.artists || []).map((artist) => artist.name).join(", "),
+      track: trackName,
+      artist: artistName,
       albumArt: payload.item.album?.images?.[0]?.url || ""
     });
   } catch (error) {
+    console.log("[spotify-now-playing] Handler error", { message: error.message });
     return response(200, { isPlaying: false, error: error.message });
   }
 }

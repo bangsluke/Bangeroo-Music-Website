@@ -46,9 +46,9 @@
     <link rel="stylesheet" href="./css/visitor-counter.css" />
     <link rel="stylesheet" href="./css/guestbook.css" />
     <link rel="stylesheet" href="./css/responsive.css" />
-    <link rel="stylesheet" href="./css/variant-c.css" />
+    <link rel="stylesheet" href="./css/site-layout.css" />
   </head>
-  <body class="design design-c">
+  <body class="site">
     <div id="vhs-intro" aria-hidden="true">
       <div class="vhs-intro__noise"></div>
       <div class="vhs-intro__tracking"></div>
@@ -69,6 +69,28 @@
         <span class="section-nav__brand-bottom">EROO</span>
       </a>
 
+      <div
+        class="nav-now-playing header-now-playing header-brand--hidden"
+        id="header-now-playing"
+        data-now-playing-target
+        data-now-playing-mode="header"
+        title="Shows whether Bangeroo is currently online listening to Spotify."
+        aria-label="Shows whether Bangeroo is currently online listening to Spotify."
+      >
+        <span class="nav-now-playing__spotify-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="img">
+            <path
+              d="M17.3 10.2a.8.8 0 0 1-1.1.3 9.3 9.3 0 0 0-8.4-.8.8.8 0 1 1-.6-1.5 10.9 10.9 0 0 1 9.9.9.8.8 0 0 1 .2 1.1zm1.6-2.9a1 1 0 0 1-1.4.3 12.4 12.4 0 0 0-11.3-1 1 1 0 1 1-.7-1.9 14.4 14.4 0 0 1 13.1 1.2 1 1 0 0 1 .3 1.4zm-3.2 5.8a.7.7 0 0 1-1 .2 7.4 7.4 0 0 0-6.7-.7.7.7 0 0 1-.5-1.3 8.9 8.9 0 0 1 8 .8.7.7 0 0 1 .2 1z"
+              fill="currentColor"
+            />
+          </svg>
+        </span>
+        <span class="pulse-dot pulse-dot--offline" data-now-playing-dot></span>
+        <div class="now-playing-text-wrap" data-now-playing-wrap>
+          <span data-now-playing-text>MB Offline</span>
+        </div>
+      </div>
+
       <nav class="nav-links" aria-label="Page sections">
         <a class="nav-link" href="#music" data-scroll-link>The Music</a>
         <a class="nav-link" href="#gallery" data-scroll-link>Gallery</a>
@@ -88,26 +110,6 @@
         <span aria-hidden="true"></span>
       </button>
 
-      <div
-        class="nav-now-playing"
-        id="nav-now-playing"
-        title="Shows whether Bangeroo is currently online listening to Spotify."
-        aria-label="Shows whether Bangeroo is currently online listening to Spotify."
-      >
-        <span class="nav-now-playing__spotify-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" role="img">
-            <path
-              d="M17.3 10.2a.8.8 0 0 1-1.1.3 9.3 9.3 0 0 0-8.4-.8.8.8 0 1 1-.6-1.5 10.9 10.9 0 0 1 9.9.9.8.8 0 0 1 .2 1.1zm1.6-2.9a1 1 0 0 1-1.4.3 12.4 12.4 0 0 0-11.3-1 1 1 0 1 1-.7-1.9 14.4 14.4 0 0 1 13.1 1.2 1 1 0 0 1 .3 1.4zm-3.2 5.8a.7.7 0 0 1-1 .2 7.4 7.4 0 0 0-6.7-.7.7.7 0 0 1-.5-1.3 8.9 8.9 0 0 1 8 .8.7.7 0 0 1 .2 1z"
-              fill="currentColor"
-            />
-          </svg>
-        </span>
-        <span class="pulse-dot pulse-dot--offline" id="now-playing-dot"></span>
-        <div class="now-playing-text-wrap">
-          <span id="now-playing-text">MB Offline</span>
-        </div>
-      </div>
-
       <div id="site-nav-menu" class="nav-menu">
         <a class="nav-menu-link" href="#music" data-scroll-link>The Music</a>
         <a class="nav-menu-link" href="#gallery" data-scroll-link>Gallery</a>
@@ -125,28 +127,48 @@
           muted
           loop
           playsinline
-          poster="/images/hero/hero-image.jpg"
         >
-          <source src="/images/hero/hero-video.mp4" type="video/mp4" />
+          <source src="/hero-video.mp4" type="video/mp4" />
         </video>
-        <img
-          id="hero-fallback-image"
-          class="hero-fallback-image"
-          src="/images/hero/hero-image.jpg"
-          alt="The Bangs Collective visual backdrop"
-        />
+        <div
+          id="hero-fallback-layer"
+          class="hero-fallback-layer"
+          aria-hidden="true"
+        ></div>
         <div class="hero-overlay"></div>
       </div>
 
       <div class="hero-content">
-        <h1 class="hero-logo glitch-text logo-click-target" id="hero-logo" data-text="BANGEROO">
-          BANGEROO
+        <h1 class="hero-logo logo-click-target" id="hero-logo" aria-label="BANG EROO">
+          <span class="hero-logo-line hero-logo-line--top">BANG</span>
+          <span class="hero-logo-line hero-logo-line--bottom">EROO</span>
         </h1>
         <p class="hero-bio" id="hero-bio">
           Influenced by the raw energy of placeholder artists, The Bangs Collective
           brings angular grooves, restless textures, and late-night static to every
           track.
         </p>
+        <div
+          class="hero-now-playing"
+          id="hero-now-playing"
+          data-now-playing-target
+          data-now-playing-mode="hero"
+          title="Shows whether Bangeroo is currently online listening to Spotify."
+          aria-label="Shows whether Bangeroo is currently online listening to Spotify."
+        >
+          <span class="nav-now-playing__spotify-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="img">
+              <path
+                d="M17.3 10.2a.8.8 0 0 1-1.1.3 9.3 9.3 0 0 0-8.4-.8.8.8 0 1 1-.6-1.5 10.9 10.9 0 0 1 9.9.9.8.8 0 0 1 .2 1.1zm1.6-2.9a1 1 0 0 1-1.4.3 12.4 12.4 0 0 0-11.3-1 1 1 0 1 1-.7-1.9 14.4 14.4 0 0 1 13.1 1.2 1 1 0 0 1 .3 1.4zm-3.2 5.8a.7.7 0 0 1-1 .2 7.4 7.4 0 0 0-6.7-.7.7.7 0 0 1-.5-1.3 8.9 8.9 0 0 1 8 .8.7.7 0 0 1 .2 1z"
+                fill="currentColor"
+              />
+            </svg>
+          </span>
+          <span class="pulse-dot pulse-dot--offline" data-now-playing-dot></span>
+          <div class="now-playing-text-wrap" data-now-playing-wrap>
+            <span data-now-playing-text>MB Offline</span>
+          </div>
+        </div>
         <div class="hero-contact" aria-label="Hero contact links">
           <a
             id="hero-email-link"
@@ -186,6 +208,10 @@
 
       <section id="streaming-links" class="streaming-links lazy-section" aria-label="Streaming links">
         <div class="section-inner">
+          <p class="spotify-availability">
+            All Bangeroo tracks are available through Spotify, iTunes, Amazon Music and many
+            other music outlets. You can't use that as an excuse then.
+          </p>
           <div class="streaming-links__row">
             <a
               data-streaming-link="spotify"
@@ -194,7 +220,7 @@
               rel="noreferrer"
               aria-label="Open Spotify"
             >
-              <img src="./assets/icons/spotify.svg" alt="" />
+              <img src="/images/icons/spotify.svg" alt="" />
             </a>
             <a
               data-streaming-link="soundcloud"
@@ -203,7 +229,7 @@
               rel="noreferrer"
               aria-label="Open SoundCloud"
             >
-              <img src="./assets/icons/soundcloud.svg" alt="" />
+              <img src="/images/icons/soundcloud.svg" alt="" />
             </a>
             <a
               data-streaming-link="itunes"
@@ -212,7 +238,7 @@
               rel="noreferrer"
               aria-label="Open Apple Music"
             >
-              <img src="./assets/icons/itunes.svg" alt="" />
+              <img src="/images/icons/itunes.svg" alt="" />
             </a>
             <a
               data-streaming-link="amazonMusic"
@@ -221,7 +247,7 @@
               rel="noreferrer"
               aria-label="Open Amazon Music"
             >
-              <img src="./assets/icons/amazon-music.svg" alt="" />
+              <img src="/images/icons/amazon-music.svg" alt="" />
             </a>
           </div>
         </div>

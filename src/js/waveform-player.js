@@ -150,7 +150,7 @@ export function initWaveformPlayer() {
       url: `/songs/${encodeURIComponent(track.filename)}`
     });
 
-    instances.push({ id: track.id, waveSurfer, playButton });
+    instances.push({ id: track.id, waveSurfer, playButton, card });
 
     waveSurfer.on("ready", () => {
       timeLabel.textContent = `0:00 / ${formatTime(waveSurfer.getDuration())}`;
@@ -167,9 +167,11 @@ export function initWaveformPlayer() {
         if (item.id !== track.id) {
           item.waveSurfer.pause();
           setPlayButtonState(item.playButton, false);
+          item.card.classList.remove("is-playing");
         }
       });
       setPlayButtonState(playButton, true);
+      card.classList.add("is-playing");
       connectAnalyserFromWave(waveSurfer);
       if (!rafId) {
         updateAudioReactiveCss();
@@ -178,6 +180,7 @@ export function initWaveformPlayer() {
 
     waveSurfer.on("pause", () => {
       setPlayButtonState(playButton, false);
+      card.classList.remove("is-playing");
       if (!instances.some((item) => item.waveSurfer.isPlaying())) {
         stopAudioReactiveCss();
       }
@@ -185,6 +188,7 @@ export function initWaveformPlayer() {
 
     waveSurfer.on("finish", () => {
       setPlayButtonState(playButton, false);
+      card.classList.remove("is-playing");
       stopAudioReactiveCss();
     });
 

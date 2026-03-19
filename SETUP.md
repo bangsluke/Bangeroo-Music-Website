@@ -53,7 +53,7 @@
 
 - Global randomized effects live in `src/js/chaos-effects.js`.
 - Scroll-trigger behavior is in `src/js/lazy-load.js`.
-- Core effect styling lives in `src/css/variant-c.css`, `src/css/base.css`, and `src/css/glitch.css`.
+- Core effect styling lives in `src/css/site-layout.css`, `src/css/base.css`, and `src/css/glitch.css`.
 - For accessibility, all high-intensity effects are reduced/disabled when `prefers-reduced-motion: reduce` is active.
 
 ## Gallery Constraints

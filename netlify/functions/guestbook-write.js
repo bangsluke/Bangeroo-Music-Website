@@ -51,6 +51,7 @@ export async function handler(event) {
   const now = new Date();
   const sixtySecondsAgo = new Date(now.getTime() - 60 * 1000).toISOString();
 
+  let canUseIpHash = true;
   const { data: recent, error: recentError } = await supabase
     .from("guestbook")
     .select("id")
@@ -59,13 +60,18 @@ export async function handler(event) {
     .limit(1);
 
   if (recentError) {
-    return response(500, { error: recentError.message });
+    if (recentError.message?.includes("ip_hash")) {
+      canUseIpHash = false;
+    } else {
+      return response(500, { error: recentError.message });
+    }
   }
-  if (recent && recent.length > 0) {
+  if (canUseIpHash && recent && recent.length > 0) {
     return response(429, { error: "Please wait before posting again" });
   }
 
-  const { error } = await supabase.from("guestbook").insert({ message, ip_hash: ipHash });
+  payload = canUseIpHash ? { message, ip_hash: ipHash } : { message };
+  const { error } = await supabase.from("guestbook").insert(payload);
   if (error) {
     return response(500, { error: error.message });
   }

@@ -24,9 +24,16 @@ const DEFAULT_CONFIG = {
   },
   palettes: [],
   lyrics: [],
+  lyricFragments: {
+    intervalMs: 9000,
+    varianceMs: 3600,
+    visibleDurationMs: 2700,
+    visibleVarianceMs: 600
+  },
   counterMilestones: {},
   guestbook: {
     maxLength: 100,
+    cooldownSeconds: 60,
     readEndpoint: "/.netlify/functions/guestbook-read",
     writeEndpoint: "/.netlify/functions/guestbook-write"
   },
@@ -58,6 +65,10 @@ function mergeConfig(config) {
     spotify: {
       ...DEFAULT_CONFIG.spotify,
       ...config?.spotify
+    },
+    lyricFragments: {
+      ...DEFAULT_CONFIG.lyricFragments,
+      ...config?.lyricFragments
     },
     guestbook: {
       ...DEFAULT_CONFIG.guestbook,

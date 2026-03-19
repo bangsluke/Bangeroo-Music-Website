@@ -12,7 +12,8 @@ export async function initVisitorCounter(siteConfig) {
   try {
     const response = await fetch(endpoint);
     if (!response.ok) {
-      node.textContent = "Visitor counter offline";
+      const errorBody = await response.json().catch(() => ({}));
+      node.textContent = errorBody.error || "Visitor counter offline";
       return;
     }
     const data = await response.json();

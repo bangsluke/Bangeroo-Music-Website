@@ -56,7 +56,7 @@
 @media (min-width: 1024px) {
   .gallery .splide {
     height: auto;
-    width: min(100%, calc(50vh * 16 / 9));
+    width: min(50%, calc(25vh * 16 / 9));
     max-height: none;
     aspect-ratio: 1 / 1;
     margin-inline: auto;

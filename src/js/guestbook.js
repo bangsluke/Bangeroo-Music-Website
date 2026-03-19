@@ -28,11 +28,22 @@ export async function initGuestbook(siteConfig) {
   if (!wall || !form || !input || !counter) {
     return;
   }
+  const status = document.createElement("small");
+  status.id = "guestbook-status";
+  status.style.color = "var(--color-text-secondary)";
+  status.textContent = "";
+  form.append(status);
+
+  const setStatus = (message) => {
+    status.textContent = message || "";
+  };
 
   const refreshMessages = async () => {
     try {
       const response = await fetch(siteConfig.guestbook.readEndpoint);
       if (!response.ok) {
+        const errorBody = await response.json().catch(() => ({}));
+        setStatus(errorBody.error || "Shout Wall is temporarily unavailable.");
         return;
       }
       const data = await response.json();
@@ -40,8 +51,9 @@ export async function initGuestbook(siteConfig) {
       (data.messages || []).forEach((entry) => {
         renderMessage(wall, entry.message);
       });
+      setStatus("");
     } catch {
-      // No-op fallback for local/no-backend mode.
+      setStatus("Cannot connect to Shout Wall service.");
     }
   };
 
@@ -58,6 +70,7 @@ export async function initGuestbook(siteConfig) {
     event.preventDefault();
     const value = stripHtml(input.value.trim()).slice(0, maxLength);
     if (!value) {
+      setStatus("Message cannot be empty.");
       return;
     }
 
@@ -70,13 +83,16 @@ export async function initGuestbook(siteConfig) {
         body: JSON.stringify({ message: value })
       });
       if (!response.ok) {
+        const errorBody = await response.json().catch(() => ({}));
+        setStatus(errorBody.error || "Unable to post message right now.");
         return;
       }
       renderMessage(wall, value, true);
       input.value = "";
       updateCounter();
+      setStatus("Posted.");
     } catch {
-      // No-op fallback for local/no-backend mode.
+      setStatus("Network error while posting.");
     }
   });
 }
