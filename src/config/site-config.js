@@ -8,9 +8,9 @@ export const siteConfig = {
   },
   streamingLinks: {
     spotify: "https://open.spotify.com/artist/0gXu1oMsNf8fnRY0NPCoSw",
-    soundcloud: "https://soundcloud.com/PLACEHOLDER",
-    itunes: "https://music.apple.com/artist/PLACEHOLDER",
-    amazonMusic: "https://music.amazon.co.uk/artists/PLACEHOLDER"
+    soundcloud: "https://soundcloud.com/PLACEHOLDER-TBC",
+    itunes: "https://music.apple.com/artist/PLACEHOLDER-TBC",
+    amazonMusic: "https://music.amazon.co.uk/artists/PLACEHOLDER-TBC"
   },
   spotifyEmbed: {
     artistId: "PLACEHOLDER_ID",
