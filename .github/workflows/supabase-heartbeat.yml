@@ -1,0 +1,25 @@
+name: Supabase Heartbeat
+
+on:
+  schedule:
+    - cron: "17 3 */3 * *"
+  workflow_dispatch:
+
+jobs:
+  heartbeat:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Ping Supabase heartbeat endpoint
+        env:
+          HEARTBEAT_URL: ${{ secrets.HEARTBEAT_URL }}
+          HEARTBEAT_TOKEN: ${{ secrets.HEARTBEAT_TOKEN }}
+        run: |
+          if [ -z "$HEARTBEAT_URL" ] || [ -z "$HEARTBEAT_TOKEN" ]; then
+            echo "Missing required secrets: HEARTBEAT_URL or HEARTBEAT_TOKEN"
+            exit 1
+          fi
+
+          curl --silent --show-error --fail --max-time 20 --retry 2 --retry-delay 5 \
+            -H "x-heartbeat-token: $HEARTBEAT_TOKEN" \
+            "$HEARTBEAT_URL"

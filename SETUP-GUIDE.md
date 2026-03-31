@@ -280,3 +280,31 @@ Before deploy, verify:
 - Local endpoint tests pass in Section 4
 
 Then push to your connected repository. Netlify will build and deploy automatically.
+
+## 8) Keep Supabase Free Project Active (Heartbeat Automation)
+
+Free-tier Supabase projects can pause after inactivity. This repo includes an automated heartbeat:
+- Netlify function: `/.netlify/functions/supabase-heartbeat`
+- GitHub Actions schedule: `.github/workflows/supabase-heartbeat.yml` (every 3 days)
+
+### Step 1: Add Netlify environment variable
+In Netlify Site Settings -> Environment variables, add:
+
+```env
+HEARTBEAT_TOKEN=YOUR_LONG_RANDOM_TOKEN
+```
+
+Use a high-entropy token (for example, 32+ random characters).
+
+### Step 2: Add GitHub repository secrets
+In GitHub -> Settings -> Secrets and variables -> Actions, add:
+
+- `HEARTBEAT_URL` = `https://YOUR_SITE_DOMAIN/.netlify/functions/supabase-heartbeat`
+- `HEARTBEAT_TOKEN` = same value as Netlify `HEARTBEAT_TOKEN`
+
+### Step 3: Verify once manually
+Run the workflow manually from GitHub Actions (`workflow_dispatch`) and confirm it succeeds.
+
+### Step 4: Confirm no caching and DB access
+The heartbeat endpoint is protected by a token and performs a real Supabase table read (`visitor_count`) with `Cache-Control: no-store`.
+This is intentional to ensure a real backend/database activity signal.
