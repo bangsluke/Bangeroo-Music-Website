@@ -20,6 +20,19 @@ jobs:
             exit 1
           fi
 
-          curl --silent --show-error --fail --max-time 20 --retry 2 --retry-delay 5 \
+          echo "Pinging: $HEARTBEAT_URL"
+
+          STATUS=$(curl --silent --show-error --max-time 20 --retry 2 --retry-delay 5 \
             -H "x-heartbeat-token: $HEARTBEAT_TOKEN" \
-            "$HEARTBEAT_URL"
+            --write-out "%{http_code}" \
+            --output /tmp/heartbeat-response.txt \
+            "$HEARTBEAT_URL")
+
+          echo "HTTP status: $STATUS"
+          echo "Response body:"
+          cat /tmp/heartbeat-response.txt
+
+          if [ "$STATUS" -lt 200 ] || [ "$STATUS" -ge 300 ]; then
+            echo "Heartbeat request failed with non-2xx status."
+            exit 1
+          fi

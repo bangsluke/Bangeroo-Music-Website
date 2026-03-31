@@ -285,6 +285,7 @@ Then push to your connected repository. Netlify will build and deploy automatica
 
 Free-tier Supabase projects can pause after inactivity. This repo includes an automated heartbeat:
 - Netlify function: `/.netlify/functions/supabase-heartbeat`
+- Friendly route alias: `/api/supabase-heartbeat` (rewrites to the Netlify function)
 - GitHub Actions schedule: `.github/workflows/supabase-heartbeat.yml` (every 3 days)
 
 ### Step 1: Add Netlify environment variable
@@ -300,10 +301,16 @@ Use a high-entropy token (for example, 32+ random characters).
 In GitHub -> Settings -> Secrets and variables -> Actions, add:
 
 - `HEARTBEAT_URL` = `https://YOUR_SITE_DOMAIN/.netlify/functions/supabase-heartbeat`
+- Recommended: `https://YOUR_SITE_DOMAIN/api/supabase-heartbeat`
 - `HEARTBEAT_TOKEN` = same value as Netlify `HEARTBEAT_TOKEN`
 
 ### Step 3: Verify once manually
 Run the workflow manually from GitHub Actions (`workflow_dispatch`) and confirm it succeeds.
+
+If you get a 404:
+- Confirm the latest commit is deployed on Netlify (the function and redirect must exist in that deploy).
+- Confirm `HEARTBEAT_URL` points to your deployed production domain and exact path:
+  - `https://YOUR_SITE_DOMAIN/api/supabase-heartbeat`
 
 ### Step 4: Confirm no caching and DB access
 The heartbeat endpoint is protected by a token and performs a real Supabase table read (`visitor_count`) with `Cache-Control: no-store`.
