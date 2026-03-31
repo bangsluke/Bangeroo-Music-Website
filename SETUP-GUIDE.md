@@ -312,6 +312,16 @@ If you get a 404:
 - Confirm `HEARTBEAT_URL` points to your deployed production domain and exact path:
   - `https://YOUR_SITE_DOMAIN/api/supabase-heartbeat`
 
+If you get a 500 with `fetch failed`:
+- Confirm Netlify has valid production env values for:
+  - `SUPABASE_URL` (must be `https://YOUR_PROJECT_REF.supabase.co`)
+  - `SUPABASE_SERVICE_KEY` (secret key, typically starts with `sb_secret_`)
+- Make sure those values are not wrapped in quotes and have no trailing spaces.
+- If you changed env vars, trigger a fresh Netlify deploy so functions pick up updated values.
+- Test endpoint directly:
+  - `https://YOUR_SITE_DOMAIN/api/supabase-heartbeat` with header `x-heartbeat-token`.
+- Check Supabase project status in dashboard and unpause first if needed.
+
 ### Step 4: Confirm no caching and DB access
 The heartbeat endpoint is protected by a token and performs a real Supabase table read (`visitor_count`) with `Cache-Control: no-store`.
 This is intentional to ensure a real backend/database activity signal.

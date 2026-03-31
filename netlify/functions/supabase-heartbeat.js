@@ -34,19 +34,37 @@ export async function handler(event) {
     return response(500, { error: "Supabase is not configured" });
   }
 
-  const supabase = createClient(supabaseUrl, supabaseServiceKey);
-  const { data, error } = await supabase.from("visitor_count").select("id").limit(1);
-
-  if (error) {
+  if (!/^https?:\/\//i.test(supabaseUrl)) {
     return response(500, {
-      error: "Supabase heartbeat query failed",
-      detail: error.message
+      error: "SUPABASE_URL is invalid",
+      detail: "SUPABASE_URL must start with http:// or https://",
+      host: String(supabaseUrl).slice(0, 60)
     });
   }
 
-  return response(200, {
-    ok: true,
-    checkedAt: new Date().toISOString(),
-    rowsChecked: data?.length ?? 0
-  });
+  const supabase = createClient(supabaseUrl, supabaseServiceKey);
+  try {
+    const { data, error } = await supabase.from("visitor_count").select("id").limit(1);
+
+    if (error) {
+      return response(500, {
+        error: "Supabase heartbeat query failed",
+        detail: error.message,
+        host: new URL(supabaseUrl).host
+      });
+    }
+
+    return response(200, {
+      ok: true,
+      checkedAt: new Date().toISOString(),
+      rowsChecked: data?.length ?? 0,
+      host: new URL(supabaseUrl).host
+    });
+  } catch (err) {
+    return response(500, {
+      error: "Supabase heartbeat request crashed",
+      detail: err instanceof Error ? err.message : String(err),
+      host: new URL(supabaseUrl).host
+    });
+  }
 }
