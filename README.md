@@ -62,7 +62,7 @@ The project is optimized for fast static hosting and includes local-first develo
 - Splide-based gallery carousel with mobile and desktop layout behavior.
 - Interactive ambience effects (VHS intro, lyric fragments, palette randomizer).
 - Shout Wall guestbook backed by Netlify Functions + Supabase.
-- Visitor counter backed by Supabase with heartbeat health endpoint support.
+- Visitor counter backed by Supabase with write-based heartbeat keepalive support.
 
 ## Tech Stack
 
@@ -74,7 +74,7 @@ The project is optimized for fast static hosting and includes local-first develo
 
 **Backend / Integrations**
 - Netlify Functions (`netlify/functions`)
-- Supabase (`guestbook`, `visitor_count`)
+- Supabase (`guestbook`, `visitor_count`, `heartbeat_log`)
 - Spotify Web API (`spotify-now-playing`)
 
 **Testing**
@@ -147,6 +147,7 @@ Use `SETUP-GUIDE.md` for complete setup instructions covering:
 - Supabase project/table setup for guestbook and visitor counter
 - Spotify app authorization and refresh token flow
 - Local verification of Netlify Function endpoints
+- Supabase free-tier anti-pause heartbeat automation
 - Common troubleshooting steps
 
 ## Project Structure

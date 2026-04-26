@@ -1,7 +1,7 @@
 # Bangeroo Setup Guide (Spotify + Supabase + Local Debugging)
 
 This guide focuses on the two backend integrations used by the app:
-- Supabase for `guestbook` and `visitor_count`
+- Supabase for `guestbook`, `visitor_count`, and `heartbeat_log`
 - Spotify Web API for the now-playing status in the navigation
 
 This guide intentionally does not cover Spotify embed artist ID setup.
@@ -54,9 +54,20 @@ create table if not exists visitor_count (
   count integer not null default 0
 );
 
+-- Single-row heartbeat table for anti-pause keepalive writes
+create table if not exists heartbeat_log (
+  id integer primary key,
+  source text not null default 'netlify-heartbeat',
+  last_seen_at timestamptz not null default now()
+);
+
 -- Ensure row id=1 exists for upsert flow in visitor-count function
 insert into visitor_count (id, count)
 values (1, 0)
+on conflict (id) do nothing;
+
+insert into heartbeat_log (id, source)
+values (1, 'netlify-heartbeat')
 on conflict (id) do nothing;
 ```
 
@@ -66,6 +77,7 @@ The functions use the service role key (which bypasses RLS), but enabling RLS is
 ```sql
 alter table guestbook enable row level security;
 alter table visitor_count enable row level security;
+alter table heartbeat_log enable row level security;
 
 -- Optional but recommended if you later query these tables from clients.
 -- Service role still has full access regardless.
@@ -79,6 +91,13 @@ with check (true);
 drop policy if exists "service role full access visitor_count" on visitor_count;
 create policy "service role full access visitor_count"
 on visitor_count
+for all
+using (true)
+with check (true);
+
+drop policy if exists "service role full access heartbeat_log" on heartbeat_log;
+create policy "service role full access heartbeat_log"
+on heartbeat_log
 for all
 using (true)
 with check (true);
@@ -219,7 +238,7 @@ Invoke-RestMethod -Method Get -Uri "http://localhost:8888/.netlify/functions/spo
   - **Cause:** Missing `SUPABASE_URL` or `SUPABASE_SERVICE_KEY`
   - **Fix:** Set both env vars, restart `netlify dev`
 
-- **Symptom:** `relation "guestbook" does not exist` or `relation "visitor_count" does not exist`
+- **Symptom:** `relation "guestbook" does not exist`, `relation "visitor_count" does not exist`, or `relation "heartbeat_log" does not exist`
   - **Cause:** SQL schema not created in your current Supabase project
   - **Fix:** Re-run SQL setup in Section 2, then test endpoints again
 
@@ -286,7 +305,7 @@ Then push to your connected repository. Netlify will build and deploy automatica
 Free-tier Supabase projects can pause after inactivity. This repo includes an automated heartbeat:
 - Netlify function: `/.netlify/functions/supabase-heartbeat`
 - Friendly route alias: `/api/supabase-heartbeat` (rewrites to the Netlify function)
-- GitHub Actions schedule: `.github/workflows/supabase-heartbeat.yml` (daily)
+- GitHub Actions schedule: `.github/workflows/supabase-heartbeat.yml` (every 6 hours)
 
 ### Step 1: Add Netlify environment variable
 In Netlify Site Settings -> Environment variables, add:
@@ -322,11 +341,32 @@ If you get a 500 with `fetch failed`:
   - `https://YOUR_SITE_DOMAIN/api/supabase-heartbeat` with header `x-heartbeat-token`.
 - Check Supabase project status in dashboard and unpause first if needed.
 
-### Step 4: Confirm no caching and DB access
-The heartbeat endpoint is protected by a token and performs a real Supabase table read (`visitor_count`) with `Cache-Control: no-store`.
-This is intentional to ensure a real backend/database activity signal.
+### Step 4: Confirm write-based DB heartbeat
+The heartbeat endpoint is protected by a token and sends a write keepalive to Supabase with `Cache-Control: no-store`.
+Write activity is generally a stronger anti-pause signal than reads.
 
 Current heartbeat behavior:
-- Primary path: Supabase JS SDK query to `visitor_count`.
-- Fallback path: direct REST call to Supabase (`/rest/v1/visitor_count?select=id&limit=1`).
-- This makes diagnostics clearer and reduces false negatives from transient SDK/fetch issues.
+- Primary path: Supabase JS SDK upsert to `heartbeat_log` (`id=1`, refreshes `last_seen_at`).
+- Fallback path: direct REST upsert to `heartbeat_log`.
+- Safety fallback: if write paths fail, function still performs a `visitor_count` read and returns `read-fallback` mode.
+
+The GitHub action now runs every 6 hours and validates response JSON:
+- Requires `ok: true`
+- Requires `heartbeatMode` in (`write-sdk`, `write-rest-fallback`, `read-fallback`)
+
+### Step 5: Add a second independent cron source (recommended)
+To reduce provider-specific misses, configure one additional external scheduler to call the same endpoint.
+Recommended options:
+- [UptimeRobot](https://uptimerobot.com/) (keyword monitor or HTTP monitor)
+- [cron-job.org](https://cron-job.org/)
+
+Use:
+- URL: `https://YOUR_SITE_DOMAIN/api/supabase-heartbeat`
+- Header: `x-heartbeat-token: YOUR_LONG_RANDOM_TOKEN`
+- Frequency: every 6 to 12 hours (stagger from GitHub action times)
+
+### Step 6: Verify heartbeat evidence in Supabase
+After one manual run:
+- Open Supabase table editor for `heartbeat_log`.
+- Confirm row `id=1` shows a recently updated `last_seen_at`.
+- Optionally check Supabase logs around the run timestamp for the upsert query.

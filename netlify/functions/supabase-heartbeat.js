@@ -11,7 +11,65 @@ function response(statusCode, body) {
   };
 }
 
-async function restHeartbeat(supabaseUrl, supabaseServiceKey) {
+function errorDetail(err) {
+  if (!err) return "Unknown error";
+  if (typeof err === "string") return err;
+  if (err instanceof Error) return err.message;
+  if (typeof err === "object" && "message" in err) return String(err.message);
+  return String(err);
+}
+
+function isHeartbeatTableMissing(detail) {
+  return /heartbeat_log|relation .* does not exist|PGRST205|42P01/i.test(detail);
+}
+
+async function restWriteHeartbeat(supabaseUrl, supabaseServiceKey) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 10000);
+  const heartbeatAt = new Date().toISOString();
+
+  try {
+    const res = await fetch(
+      `${supabaseUrl.replace(/\/$/, "")}/rest/v1/heartbeat_log?on_conflict=id`,
+      {
+        method: "POST",
+        headers: {
+          apikey: supabaseServiceKey,
+          Authorization: `Bearer ${supabaseServiceKey}`,
+          "content-type": "application/json",
+          Prefer: "resolution=merge-duplicates,return=representation"
+        },
+        body: JSON.stringify([
+          {
+            id: 1,
+            source: "netlify-heartbeat",
+            last_seen_at: heartbeatAt
+          }
+        ]),
+        signal: controller.signal
+      }
+    );
+
+    const text = await res.text();
+    if (!res.ok) {
+      return {
+        ok: false,
+        detail: `REST write heartbeat failed with status ${res.status}: ${text.slice(0, 300)}`
+      };
+    }
+
+    return { ok: true, heartbeatAt, detail: text.slice(0, 300) };
+  } catch (err) {
+    return {
+      ok: false,
+      detail: errorDetail(err)
+    };
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+async function restReadHeartbeat(supabaseUrl, supabaseServiceKey) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 10000);
 
@@ -32,15 +90,15 @@ async function restHeartbeat(supabaseUrl, supabaseServiceKey) {
     if (!res.ok) {
       return {
         ok: false,
-        detail: `REST heartbeat failed with status ${res.status}: ${text.slice(0, 200)}`
+        detail: `REST read fallback failed with status ${res.status}: ${text.slice(0, 300)}`
       };
     }
 
-    return { ok: true, detail: text.slice(0, 200) };
+    return { ok: true, detail: text.slice(0, 300) };
   } catch (err) {
     return {
       ok: false,
-      detail: err instanceof Error ? err.message : String(err)
+      detail: errorDetail(err)
     };
   } finally {
     clearTimeout(timeout);
@@ -80,41 +138,59 @@ export async function handler(event) {
 
   const supabase = createClient(supabaseUrl, supabaseServiceKey);
   try {
-    const { data, error } = await supabase.from("visitor_count").select("id").limit(1);
+    const heartbeatAt = new Date().toISOString();
+    const { error } = await supabase.from("heartbeat_log").upsert(
+      {
+        id: 1,
+        source: "netlify-heartbeat",
+        last_seen_at: heartbeatAt
+      },
+      { onConflict: "id" }
+    );
 
-    if (error) {
-      const fallback = await restHeartbeat(supabaseUrl, supabaseServiceKey);
-      return response(fallback.ok ? 200 : 500, {
-        ok: fallback.ok,
-        error: "Supabase heartbeat query failed via SDK",
-        detail: error.message,
-        fallbackDetail: fallback.detail,
-        host: new URL(supabaseUrl).host
-      });
-    }
-
+    if (error) throw error;
     return response(200, {
       ok: true,
-      checkedAt: new Date().toISOString(),
-      rowsChecked: data?.length ?? 0,
+      heartbeatMode: "write-sdk",
+      heartbeatAt,
       host: new URL(supabaseUrl).host
     });
   } catch (err) {
-    const fallback = await restHeartbeat(supabaseUrl, supabaseServiceKey);
-    if (fallback.ok) {
+    const sdkError = errorDetail(err);
+    const writeFallback = await restWriteHeartbeat(supabaseUrl, supabaseServiceKey);
+    if (writeFallback.ok) {
       return response(200, {
         ok: true,
+        heartbeatMode: "write-rest-fallback",
+        heartbeatAt: writeFallback.heartbeatAt,
+        host: new URL(supabaseUrl).host,
+        note: "SDK write failed; REST write fallback succeeded",
+        sdkError
+      });
+    }
+
+    const readFallback = await restReadHeartbeat(supabaseUrl, supabaseServiceKey);
+    if (readFallback.ok) {
+      return response(200, {
+        ok: true,
+        heartbeatMode: "read-fallback",
         checkedAt: new Date().toISOString(),
         host: new URL(supabaseUrl).host,
-        note: "SDK path failed; REST fallback succeeded",
-        sdkError: err instanceof Error ? err.message : String(err)
+        warning: isHeartbeatTableMissing(sdkError)
+          ? "Write heartbeat unavailable. Create heartbeat_log table to enforce write-based keepalive."
+          : "Write heartbeat failed; read fallback succeeded.",
+        sdkError,
+        writeFallbackDetail: writeFallback.detail
       });
     }
 
     return response(500, {
       error: "Supabase heartbeat request crashed",
-      detail: err instanceof Error ? err.message : String(err),
-      fallbackDetail: fallback.detail,
+      detail: sdkError,
+      writeFallbackDetail: writeFallback.detail,
+      readFallbackDetail: readFallback.detail,
+      setupHint:
+        "Create table heartbeat_log(id int primary key, source text not null, last_seen_at timestamptz not null default now()).",
       host: new URL(supabaseUrl).host
     });
   }

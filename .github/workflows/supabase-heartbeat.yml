@@ -2,7 +2,7 @@ name: Supabase Heartbeat
 
 on:
   schedule:
-    - cron: "17 3 * * *"
+    - cron: "17 */6 * * *"
   workflow_dispatch:
 
 jobs:
@@ -30,9 +30,37 @@ jobs:
 
           echo "HTTP status: $STATUS"
           echo "Response body:"
-          cat /tmp/heartbeat-response.txt
+          RESPONSE_BODY="$(cat /tmp/heartbeat-response.txt)"
+          echo "$RESPONSE_BODY"
 
           if [ "$STATUS" -lt 200 ] || [ "$STATUS" -ge 300 ]; then
             echo "Heartbeat request failed with non-2xx status."
             exit 1
           fi
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          raw = Path("/tmp/heartbeat-response.txt").read_text(encoding="utf-8").strip()
+          if not raw:
+              raise SystemExit("Heartbeat response body is empty")
+
+          try:
+              payload = json.loads(raw)
+          except json.JSONDecodeError as exc:
+              raise SystemExit(f"Heartbeat response is not valid JSON: {exc}") from exc
+
+          if payload.get("ok") is not True:
+              raise SystemExit(f"Heartbeat response has ok!=true: {payload}")
+
+          mode = payload.get("heartbeatMode")
+          allowed = {"write-sdk", "write-rest-fallback", "read-fallback"}
+          if mode not in allowed:
+              raise SystemExit(f"Unexpected heartbeat mode '{mode}'. Payload: {payload}")
+
+          if mode == "read-fallback":
+              print("Heartbeat passed in read-fallback mode. Create heartbeat_log for write mode.")
+          else:
+              print(f"Heartbeat passed in {mode} mode.")
+          PY
