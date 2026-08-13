@@ -49,7 +49,9 @@
 .track-card__button,
 .track-card__download,
 .track-card__story-toggle,
-.track-card__story-close {
+.track-card__story-close,
+.track-card__lyrics-toggle,
+.track-card__lyrics-close {
   border: 1px solid var(--color-border);
   border-radius: 999px;
   background: rgba(19, 34, 87, 0.22);
@@ -97,19 +99,24 @@
 }
 
 .track-card__download,
-.track-card__story-toggle {
+.track-card__story-toggle,
+.track-card__lyrics-toggle {
   font-size: 0.72rem;
   letter-spacing: 0.04em;
   padding: 0.2rem 0.5rem;
 }
 
-.track-card__story-close {
+.track-card__story-close,
+.track-card__lyrics-close {
   font-size: 0.72rem;
   letter-spacing: 0.04em;
   padding: 0.2rem 0.5rem;
+  position: relative;
+  z-index: 9;
 }
 
-.track-card__story {
+.track-card__story,
+.track-card__lyrics {
   position: absolute;
   left: 0;
   right: 0;
@@ -122,13 +129,29 @@
   border-top: 1px solid var(--color-border);
 }
 
-.track-card.story-visible .track-card__story {
+.track-card__lyrics {
+  max-height: min(70%, 22rem);
+  overflow-y: auto;
+}
+
+.track-card.story-visible .track-card__story,
+.track-card.lyrics-visible .track-card__lyrics {
   transform: translateY(0);
 }
 
-.track-card__story-close {
-  position: relative;
-  z-index: 9;
+.track-card__lyrics-body {
+  margin-top: 0.5rem;
+}
+
+.track-card__lyrics-verse {
+  margin: 0 0 0.85rem;
+  line-height: 1.45;
+  font-style: italic;
+  color: var(--color-text-secondary);
+}
+
+.track-card__lyrics-verse:last-child {
+  margin-bottom: 0;
 }
 
 @media (max-width: 700px) {

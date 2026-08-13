@@ -47,14 +47,21 @@ export const siteConfig = {
     }
   ],
   lyrics: [
-    "Please forgive the clumsiness in all I say and do",
-    "My distraction blurs my mind",
-    "I know you scar more easily than I do",
-    "But always know our scars align",
-    "I couldn't swerve my feelings even if I wanted to",
-    "And I don't",
-    "I spin around your gravitational pull",
-    "This is real"
+    "But know our scars align",
+    "This is real",
+    "I want to help you breathe",
+    "You're carved into my bones, my heart, my soul",
+    "A crashlanding",
+    "I'm going to hit the ground so hard",
+    "Don't think about the scars",
+    "An unknown falling star",
+    "Re-wild you",
+    "Time to light the fire in your veins",
+    "Get your inner crazy out to shine",
+    "Wilderness is a state of mind",
+    "It's not fair",
+    "You're fishing for trouble",
+    "I can't fail to ignite"
   ],
   lyricFragments: {
     intervalMs: 9000,

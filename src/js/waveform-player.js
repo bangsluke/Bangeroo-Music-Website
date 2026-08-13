@@ -60,6 +60,15 @@ function stopAudioReactiveCss() {
   document.documentElement.style.setProperty("--audio-bass", "0");
 }
 
+function renderLyricsHtml(lyrics = []) {
+  return lyrics
+    .map(
+      (verse) =>
+        `<p class="track-card__lyrics-verse">${verse.join("<br>")}</p>`
+    )
+    .join("");
+}
+
 function renderTrackCard(track) {
   const card = document.createElement("article");
   card.className = "track-card";
@@ -84,11 +93,16 @@ function renderTrackCard(track) {
           track.downloadable ? "download" : ""
         }>Download</a>
         <button type="button" class="track-card__story-toggle" data-story-toggle>Behind this track</button>
+        <button type="button" class="track-card__lyrics-toggle" data-lyrics-toggle>Lyrics</button>
       </div>
     </div>
     <div class="track-card__story" data-story>
       <button type="button" class="track-card__story-close" data-story-close>Close</button>
       <p>${track.story}</p>
+    </div>
+    <div class="track-card__lyrics" data-lyrics>
+      <button type="button" class="track-card__lyrics-close" data-lyrics-close>Close</button>
+      <div class="track-card__lyrics-body">${renderLyricsHtml(track.lyrics)}</div>
     </div>
   `;
   return card;
