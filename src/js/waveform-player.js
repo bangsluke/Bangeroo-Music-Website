@@ -60,15 +60,30 @@ function stopAudioReactiveCss() {
   document.documentElement.style.setProperty("--audio-bass", "0");
 }
 
+function renderMoodTags(moods) {
+  if (!Array.isArray(moods) || moods.length === 0) {
+    return "";
+  }
+
+  return moods
+    .map((mood) => `<span class="track-card__mood-tag">#${mood}</span>`)
+    .join(" ");
+}
+
 function renderTrackCard(track) {
   const card = document.createElement("article");
   card.className = "track-card";
   card.dataset.trackId = track.id;
+  const moodTags = renderMoodTags(track.mood);
   card.innerHTML = `
     <div class="track-card__head">
       <div>
         <h3 class="track-card__title">${track.title}</h3>
-        <p class="track-card__artist">${track.artist}</p>
+        <p class="track-card__artist">
+          <span class="track-card__artist-name">${track.artist}</span>${
+            moodTags ? ` <span class="track-card__moods">${moodTags}</span>` : ""
+          }
+        </p>
       </div>
       <div class="track-card__actions">
         <button type="button" class="track-card__button" data-action="play" aria-label="Play track">
@@ -196,3 +211,8 @@ export function initWaveformPlayer() {
     playButton.addEventListener("click", () => waveSurfer.playPause());
   });
 }
+
+export const __testables__ = {
+  renderMoodTags,
+  renderTrackCard
+};

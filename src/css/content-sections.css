@@ -124,6 +124,17 @@ a.content-chip:focus-visible {
   font-style: italic;
 }
 
+.thanks__panel {
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: linear-gradient(145deg, rgba(19, 34, 87, 0.35), rgba(0, 0, 0, 0.55));
+}
+
+.thanks__panel h2 {
+  margin-top: 0;
+}
+
 .thanks__list {
   display: grid;
   gap: var(--space-md);

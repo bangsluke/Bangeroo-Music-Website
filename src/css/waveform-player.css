@@ -40,6 +40,16 @@
   font-size: 0.95rem;
 }
 
+.track-card__moods {
+  margin-left: 0.35rem;
+}
+
+.track-card__mood-tag {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.82em;
+  letter-spacing: 0.02em;
+}
+
 .track-card__actions {
   display: flex;
   align-items: center;
