@@ -4,7 +4,65 @@ export const siteConfig = {
     phone: "+447903250331"
   },
   artist: {
-    bio: "Influenced by the raw energy of placeholder artists, The Bangs Collective brings angular grooves, restless textures, and late-night static to every track."
+    name: "Bangeroo",
+    bio: "Music is magical. Greedily listening to pretty much anything that is good across many music genres, Bangeroo ponders whether he can add to the vast oceans of wonderful tunes out there. Drawing from shallowest wells of ability, he explores different styles randomly and shares songs in the hope maybe one or two unsuspecting souls fall as prey.",
+    bioClosing: "Enter if you dare....."
+  },
+  ep: {
+    title: "Finally",
+    blurb:
+      "Finally is the first collection of songs released by Bangeroo. As they have all been noodled with over a long period of time, there isn't a lot to connect them and the styles are varied, being (apparently): Anti-folk, Indie Rock, Post-rock and Experimental Rock. Apparently, one sounds like Nick Cave and Bauhaus – if only!",
+    genres: ["Anti-folk", "Indie Rock", "Post-rock", "Experimental Rock"],
+    artwork: null,
+    artworkNote: "Artwork for EP cover to be added when finalised"
+  },
+  influences: {
+    intro:
+      "Bangeroo is memory-lite, so this will be wrong, but here are the best 20 musical artists so far:",
+    artists: [
+      "Bring Me The Horizon",
+      "The Clash",
+      "Comsat Angels",
+      "David Bowie",
+      "Echo & the Bunnymen",
+      "Feeder",
+      "Honeyblood",
+      "The Jam",
+      "Joy Division",
+      "Marmozets",
+      "The National",
+      "The Psychedelic Furs (incl. Love Spit Love)",
+      "Radiohead",
+      "Ratboys",
+      "Sea Power",
+      "Siouxsie & the Banshees",
+      "Taylor Swift",
+      "The The",
+      "Throwing Muses",
+      "Yonaka"
+    ],
+    outro: "This of course may help you guess his age."
+  },
+  credits: {
+    intro: "In my musical journey so far, big thanks are merited to:",
+    people: [
+      {
+        name: "Linn Sandin",
+        role: "my awesome vocal coach, making lemon juice out of concentrated and out of date lemons"
+      },
+      {
+        name: "Luke Bangs",
+        role: "website, critical feedback"
+      },
+      {
+        name: "Malcolm Dunleavy",
+        role: "musical huge nous to learn from and perfectionism to avoid"
+      },
+      {
+        name: "Andrea Bangs",
+        role: "everything else"
+      }
+    ]
   },
   streamingLinks: {
     spotify: "https://open.spotify.com/artist/0gXu1oMsNf8fnRY0NPCoSw",

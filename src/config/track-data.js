@@ -2,7 +2,7 @@ export const tracks = [
   {
     id: "real",
     title: "Real",
-    artist: "The Bangs Collective",
+    artist: "Bangeroo",
     filename: "Real 20Feb26.mp3",
     duration: "0:00",
     story:
@@ -46,7 +46,7 @@ export const tracks = [
   {
     id: "crashlanding",
     title: "Crashlanding",
-    artist: "The Bangs Collective",
+    artist: "Bangeroo",
     // Interim: reuse Real audio until Crashlanding MP3 is added to public/songs/
     filename: "Real 20Feb26.mp3",
     duration: "0:00",
@@ -100,7 +100,7 @@ export const tracks = [
   {
     id: "rewilding",
     title: "Re-wilding",
-    artist: "The Bangs Collective",
+    artist: "Bangeroo",
     // Interim: reuse Real audio until Re-wilding MP3 is added to public/songs/
     filename: "Real 20Feb26.mp3",
     duration: "0:00",
@@ -161,7 +161,7 @@ export const tracks = [
   {
     id: "its-not-fair",
     title: "It's Not Fair",
-    artist: "The Bangs Collective",
+    artist: "Bangeroo",
     // Interim: reuse Real audio until It's Not Fair MP3 is added to public/songs/
     filename: "Real 20Feb26.mp3",
     duration: "0:00",

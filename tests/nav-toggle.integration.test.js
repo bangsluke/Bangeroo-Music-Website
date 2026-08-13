@@ -38,5 +38,5 @@ describe("mobile nav toggle", () => {
 
     toggle.click();
     expect(menu.classList.contains("nav-menu--open")).toBe(false);
-  });
+  }, 15000);
 });

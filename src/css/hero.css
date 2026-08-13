@@ -67,6 +67,16 @@
 .hero-bio {
   max-width: 60ch;
   color: var(--color-text-secondary);
+  line-height: 1.55;
+}
+
+.hero-bio__closing {
+  margin: 0;
+  max-width: 60ch;
+  color: var(--color-accent);
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .hero-contact {

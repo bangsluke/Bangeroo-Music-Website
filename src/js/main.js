@@ -14,6 +14,9 @@ import { initVhsIntro } from "./vhs-intro.js";
 import { initLyricFragments } from "./lyric-fragments.js";
 import { initVisitorCounter } from "./visitor-counter.js";
 import { initGuestbook } from "./guestbook.js";
+import { initEpRelease } from "./ep-release.js";
+import { initInfluences } from "./influences.js";
+import { initCredits } from "./credits.js";
 
 function initSectionNav() {
   const navRoot = document.querySelector(".section-nav");
@@ -222,6 +225,7 @@ function initHeroMediaFallback() {
 
 function applySiteConfig(config) {
   const bio = document.querySelector("#hero-bio");
+  const bioClosing = document.querySelector("#hero-bio-closing");
   const heroEmail = document.querySelector("#hero-email-link");
   const heroPhone = document.querySelector("#hero-phone-link");
   const footerEmail = document.querySelector("#footer-email-link");
@@ -232,6 +236,10 @@ function applySiteConfig(config) {
 
   if (bio) {
     bio.textContent = config.artist.bio;
+  }
+
+  if (bioClosing) {
+    bioClosing.textContent = config.artist.bioClosing;
   }
 
   if (heroEmail) {
@@ -286,6 +294,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   initHeaderBrandReveal();
   initWaveformPlayer(siteConfig);
   initTrackStories();
+  initEpRelease(siteConfig);
+  initInfluences(siteConfig);
+  initCredits(siteConfig);
   initVhsIntro();
   initLyricFragments(siteConfig);
   initColourRandomiser(siteConfig);

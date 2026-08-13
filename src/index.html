@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Bangeroo is the home of The Bangs Collective: music, gallery, and hidden surprises."
+      content="Bangeroo: music is magical. Listen to the Finally EP, browse influences, and enter if you dare."
     />
-    <meta property="og:title" content="Bangeroo | The Bangs Collective" />
+    <meta property="og:title" content="Bangeroo" />
     <meta
       property="og:description"
-      content="Explore The Bangs Collective discography, gallery moments, and more."
+      content="Bangeroo shares songs across Anti-folk, Indie Rock, Post-rock and Experimental Rock. Enter if you dare."
     />
     <meta property="og:image" content="/Bangeroo-Site-Logo.png" />
     <meta property="og:type" content="website" />
@@ -25,7 +25,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Audiowide&family=VT323&display=swap"
     />
-    <title>Bangeroo | The Bangs Collective</title>
+    <title>Bangeroo</title>
 
     <script
       defer
@@ -41,6 +41,7 @@
     <link rel="stylesheet" href="./css/gallery.css" />
     <link rel="stylesheet" href="./css/easter-egg.css" />
     <link rel="stylesheet" href="./css/waveform-player.css" />
+    <link rel="stylesheet" href="./css/content-sections.css" />
     <link rel="stylesheet" href="./css/vhs-intro.css" />
     <link rel="stylesheet" href="./css/lyric-fragments.css" />
     <link rel="stylesheet" href="./css/visitor-counter.css" />
@@ -93,6 +94,7 @@
 
       <nav class="nav-links" aria-label="Page sections">
         <a class="nav-link" href="#music" data-scroll-link>The Music</a>
+        <a class="nav-link" href="#influences" data-scroll-link>Influences</a>
         <a class="nav-link" href="#gallery" data-scroll-link>Gallery</a>
         <a class="nav-link" href="#gigs" data-scroll-link>Gigs</a>
         <a class="nav-link" href="#guestbook" data-scroll-link>Shout Wall</a>
@@ -112,6 +114,7 @@
 
       <div id="site-nav-menu" class="nav-menu">
         <a class="nav-menu-link" href="#music" data-scroll-link>The Music</a>
+        <a class="nav-menu-link" href="#influences" data-scroll-link>Influences</a>
         <a class="nav-menu-link" href="#gallery" data-scroll-link>Gallery</a>
         <a class="nav-menu-link" href="#gigs" data-scroll-link>Gigs</a>
         <a class="nav-menu-link" href="#guestbook" data-scroll-link>Shout Wall</a>
@@ -144,10 +147,13 @@
           <span class="hero-logo-line hero-logo-line--bottom">EROO</span>
         </h1>
         <p class="hero-bio" id="hero-bio">
-          Influenced by the raw energy of placeholder artists, The Bangs Collective
-          brings angular grooves, restless textures, and late-night static to every
-          track.
+          Music is magical. Greedily listening to pretty much anything that is good
+          across many music genres, Bangeroo ponders whether he can add to the vast
+          oceans of wonderful tunes out there. Drawing from shallowest wells of
+          ability, he explores different styles randomly and shares songs in the hope
+          maybe one or two unsuspecting souls fall as prey.
         </p>
+        <p class="hero-bio__closing" id="hero-bio-closing">Enter if you dare.....</p>
         <div
           class="hero-now-playing"
           id="hero-now-playing"
@@ -202,6 +208,7 @@
       <section id="music" class="music lazy-section" aria-labelledby="music-title">
         <div class="section-inner">
           <h2 id="music-title" class="glitch-text" data-text="The Music">The Music</h2>
+          <div id="ep-release"></div>
           <div id="waveform-player"></div>
         </div>
       </section>
@@ -253,6 +260,15 @@
         </div>
       </section>
 
+      <section id="influences" class="influences lazy-section" aria-labelledby="influences-title">
+        <div class="section-inner">
+          <h2 id="influences-title" class="glitch-text" data-text="Influences">Influences</h2>
+          <p id="influences-intro" class="influences__intro"></p>
+          <ul id="influences-list" class="influences__list"></ul>
+          <p id="influences-outro" class="influences__outro"></p>
+        </div>
+      </section>
+
       <section id="gallery" class="gallery lazy-section" aria-labelledby="gallery-title">
         <div class="section-inner">
           <h2 id="gallery-title" class="glitch-text" data-text="Gallery">Gallery</h2>
@@ -295,10 +311,18 @@
           <div id="guestbook-wall" class="guestbook-wall" aria-live="polite"></div>
         </div>
       </section>
+
+      <section id="thanks" class="thanks lazy-section" aria-labelledby="thanks-title">
+        <div class="section-inner">
+          <h2 id="thanks-title" class="glitch-text" data-text="Thank yous">Thank yous</h2>
+          <p id="thanks-intro" class="thanks__intro"></p>
+          <ul id="thanks-list" class="thanks__list"></ul>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer lazy-section">
-      <small class="site-footer__label">Bangeroo - The Bangs Collective</small>
+      <small class="site-footer__label">Bangeroo</small>
       <div class="footer-contact" aria-label="Contact links">
         <a
           id="footer-email-link"

@@ -6,7 +6,25 @@ const DEFAULT_CONFIG = {
     phone: "+440000000000"
   },
   artist: {
-    bio: "Influenced by the raw energy of placeholder artists, The Bangs Collective brings angular grooves, restless textures, and late-night static to every track."
+    name: "Bangeroo",
+    bio: "Music is magical. Greedily listening to pretty much anything that is good across many music genres, Bangeroo ponders whether he can add to the vast oceans of wonderful tunes out there. Drawing from shallowest wells of ability, he explores different styles randomly and shares songs in the hope maybe one or two unsuspecting souls fall as prey.",
+    bioClosing: "Enter if you dare....."
+  },
+  ep: {
+    title: "Finally",
+    blurb: "",
+    genres: [],
+    artwork: null,
+    artworkNote: "Artwork for EP cover to be added when finalised"
+  },
+  influences: {
+    intro: "",
+    artists: [],
+    outro: ""
+  },
+  credits: {
+    intro: "",
+    people: []
   },
   streamingLinks: {
     spotify: "https://open.spotify.com/artist/PLACEHOLDER_ID",
@@ -53,6 +71,18 @@ function mergeConfig(config) {
     artist: {
       ...DEFAULT_CONFIG.artist,
       ...config?.artist
+    },
+    ep: {
+      ...DEFAULT_CONFIG.ep,
+      ...config?.ep
+    },
+    influences: {
+      ...DEFAULT_CONFIG.influences,
+      ...config?.influences
+    },
+    credits: {
+      ...DEFAULT_CONFIG.credits,
+      ...config?.credits
     },
     streamingLinks: {
       ...DEFAULT_CONFIG.streamingLinks,

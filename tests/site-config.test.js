@@ -13,4 +13,16 @@ describe("site config shape", () => {
     expect(siteConfig).toHaveProperty("guestbook");
     expect(siteConfig).toHaveProperty("visitorCounter");
   });
+
+  it("contains artist copy keys", () => {
+    expect(siteConfig).toHaveProperty("artist");
+    expect(siteConfig.artist).toHaveProperty("bio");
+    expect(siteConfig.artist).toHaveProperty("bioClosing");
+    expect(siteConfig).toHaveProperty("ep");
+    expect(siteConfig.ep.genres).toHaveLength(4);
+    expect(siteConfig).toHaveProperty("influences");
+    expect(siteConfig.influences.artists).toHaveLength(20);
+    expect(siteConfig).toHaveProperty("credits");
+    expect(siteConfig.credits.people).toHaveLength(4);
+  });
 });

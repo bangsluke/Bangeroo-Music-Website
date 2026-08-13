@@ -5,7 +5,7 @@
 <h1 align="center">Bangeroo Music Website</h1>
 
 <p align="center">
-  <strong>Single-page music showcase</strong> for The Bangs Collective, built with Vite, modular vanilla JavaScript, and Netlify Functions.
+  <strong>Single-page music showcase</strong> for Bangeroo, built with Vite, modular vanilla JavaScript, and Netlify Functions.
 </p>
 
 <p align="center">
@@ -49,7 +49,7 @@
 
 ## Project Overview
 
-Bangeroo is a stylized music website experience centered around The Bangs Collective. It combines rich front-end visuals with lightweight serverless backend integrations for guestbook entries, visitor counting, and Spotify now-playing presence.
+Bangeroo is a stylized music website experience centered around the artist Bangeroo. It combines rich front-end visuals with lightweight serverless backend integrations for guestbook entries, visitor counting, and Spotify now-playing presence.
 
 The project is optimized for fast static hosting and includes local-first development workflows for both frontend-only and full Netlify Function testing.
 
