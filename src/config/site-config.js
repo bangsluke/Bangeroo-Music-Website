@@ -20,26 +20,86 @@ export const siteConfig = {
     intro:
       "Bangeroo is memory-lite, so this will be wrong, but here are the best 20 musical artists so far:",
     artists: [
-      "Bring Me The Horizon",
-      "The Clash",
-      "Comsat Angels",
-      "David Bowie",
-      "Echo & the Bunnymen",
-      "Feeder",
-      "Honeyblood",
-      "The Jam",
-      "Joy Division",
-      "Marmozets",
-      "The National",
-      "The Psychedelic Furs (incl. Love Spit Love)",
-      "Radiohead",
-      "Ratboys",
-      "Sea Power",
-      "Siouxsie & the Banshees",
-      "Taylor Swift",
-      "The The",
-      "Throwing Muses",
-      "Yonaka"
+      {
+        name: "Bring Me The Horizon",
+        spotifyUrl: "https://open.spotify.com/artist/1Ffb6ejR6Fe5IamqA5oRUF"
+      },
+      {
+        name: "The Clash",
+        spotifyUrl: "https://open.spotify.com/artist/3RGLhK1IP9jnYFH4BRFJBS"
+      },
+      {
+        name: "Comsat Angels",
+        spotifyUrl: "https://open.spotify.com/artist/4CuWgbN93loRIcGWMZ2DGo"
+      },
+      {
+        name: "David Bowie",
+        spotifyUrl: "https://open.spotify.com/artist/0oSGxfWSnnOXhD2fKuz2Gy"
+      },
+      {
+        name: "Echo & the Bunnymen",
+        spotifyUrl: "https://open.spotify.com/artist/0fgYKF9Avljex0L9Wt5b8Z"
+      },
+      {
+        name: "Feeder",
+        spotifyUrl: "https://open.spotify.com/artist/0ZZr6Y49NZWRJc0uCwqpMR"
+      },
+      {
+        name: "Honeyblood",
+        spotifyUrl: "https://open.spotify.com/artist/2zCxZQIcbO3Ev8AyTxxqmm"
+      },
+      {
+        name: "The Jam",
+        spotifyUrl: "https://open.spotify.com/artist/2P560DaOMNDUACoH8ZhOCR"
+      },
+      {
+        name: "Joy Division",
+        spotifyUrl: "https://open.spotify.com/artist/432R46LaYsJZV2Gmc4jUV5"
+      },
+      {
+        name: "Marmozets",
+        spotifyUrl: "https://open.spotify.com/artist/3KEhhixoMshqSEJ71rS7w1"
+      },
+      {
+        name: "The National",
+        spotifyUrl: "https://open.spotify.com/artist/2cCUtGK9sDU2EoElnk0GNB"
+      },
+      {
+        name: "The Psychedelic Furs (incl. Love Spit Love)",
+        spotifyUrl: "https://open.spotify.com/artist/0O0lrN34wrcuBenkqlEDZe"
+      },
+      {
+        name: "Radiohead",
+        spotifyUrl: "https://open.spotify.com/artist/4Z8W4fKeB5YxbusRsdQVPb"
+      },
+      {
+        name: "Ratboys",
+        spotifyUrl: "https://open.spotify.com/artist/1SoBNpuC0N4nvaQFENS0qf"
+      },
+      {
+        name: "Sea Power",
+        spotifyUrl: "https://open.spotify.com/artist/5zhn89Em2jWUUWdpcLO3YL"
+      },
+      {
+        name: "Siouxsie & the Banshees",
+        spotifyUrl: "https://open.spotify.com/artist/1n65zfwYIj5kKEtNgxUlWb"
+      },
+      {
+        name: "Taylor Swift",
+        spotifyUrl: "https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"
+      },
+      {
+        name: "The The",
+        spotifyUrl: "https://open.spotify.com/artist/7cKtqv9cYVlOwnuCFH95ce"
+      },
+      {
+        name: "Throwing Muses",
+        spotifyUrl: "https://open.spotify.com/artist/5xU5wRTlZHVRoo2OxPvqA4"
+      },
+      {
+        name: "Yonaka",
+        spotifyUrl: "https://open.spotify.com/artist/3Wcyta3gkOdQ4TfY0WyZpu"
+      }
     ],
     outro: "This of course may help you guess his age."
   },

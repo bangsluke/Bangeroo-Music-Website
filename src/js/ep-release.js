@@ -16,9 +16,9 @@ function renderArtwork(ep) {
   return placeholder;
 }
 
-function renderEpRelease(mount, ep) {
-  mount.classList.add("ep-release");
-  mount.innerHTML = "";
+function renderEpRelease(contentMount, ep) {
+  contentMount.classList.add("ep-release__content");
+  contentMount.innerHTML = "";
 
   const header = document.createElement("div");
   header.className = "ep-release__header";
@@ -46,12 +46,13 @@ function renderEpRelease(mount, ep) {
     genres.append(item);
   });
 
-  mount.append(header, blurb, genres, renderArtwork(ep));
+  contentMount.append(header, blurb, genres, renderArtwork(ep));
 }
 
 export function initEpRelease(siteConfig) {
   const mount = document.querySelector("#ep-release");
-  if (!mount) {
+  const contentMount = document.querySelector("#ep-release-content");
+  if (!mount || !contentMount) {
     return;
   }
 
@@ -60,7 +61,8 @@ export function initEpRelease(siteConfig) {
     return;
   }
 
-  renderEpRelease(mount, ep);
+  mount.classList.add("ep-release");
+  renderEpRelease(contentMount, ep);
 }
 
 export const __testables__ = {

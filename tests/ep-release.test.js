@@ -11,13 +11,18 @@ describe("ep release section", () => {
   };
 
   beforeEach(() => {
-    document.body.innerHTML = '<div id="ep-release"></div>';
+    document.body.innerHTML = `
+      <div id="ep-release">
+        <div id="ep-release-content"></div>
+        <div id="waveform-player" data-test-player></div>
+      </div>
+    `;
   });
 
   it("renders all genres", () => {
     initEpRelease({ ep: baseEp });
 
-    const chips = document.querySelectorAll("#ep-release .content-chip");
+    const chips = document.querySelectorAll("#ep-release-content .content-chip");
     expect(chips).toHaveLength(4);
     expect(chips[0].textContent).toBe("Anti-folk");
     expect(document.querySelector(".ep-release__title").textContent).toBe("Finally");
@@ -47,6 +52,15 @@ describe("ep release section", () => {
     expect(img).not.toBeNull();
     expect(img.getAttribute("src")).toBe("/images/ep/finally.jpg");
     expect(document.querySelector(".ep-release__artwork-placeholder")).toBeNull();
+  });
+
+  it("leaves the waveform player node intact", () => {
+    initEpRelease({ ep: baseEp });
+
+    const player = document.querySelector("#waveform-player");
+    expect(player).not.toBeNull();
+    expect(player.hasAttribute("data-test-player")).toBe(true);
+    expect(document.querySelector("#ep-release").contains(player)).toBe(true);
   });
 
   it("no-ops when the mount is absent", () => {

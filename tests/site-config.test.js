@@ -25,4 +25,13 @@ describe("site config shape", () => {
     expect(siteConfig).toHaveProperty("credits");
     expect(siteConfig.credits.people).toHaveLength(4);
   });
+
+  it("includes Spotify URLs for every influence artist", () => {
+    siteConfig.influences.artists.forEach((artist) => {
+      expect(artist).toHaveProperty("name");
+      expect(artist.name.length).toBeGreaterThan(0);
+      expect(artist).toHaveProperty("spotifyUrl");
+      expect(artist.spotifyUrl).toMatch(/^https:\/\/open\.spotify\.com\/artist\//);
+    });
+  });
 });

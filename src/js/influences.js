@@ -14,8 +14,29 @@ function renderInfluences(introEl, listEl, outroEl, influences) {
   listEl.innerHTML = "";
   (influences.artists || []).forEach((artist) => {
     const item = document.createElement("li");
-    item.className = "content-chip influences__chip";
-    item.textContent = artist;
+    const name = typeof artist === "string" ? artist : artist?.name;
+    const spotifyUrl = typeof artist === "object" ? artist?.spotifyUrl : null;
+
+    if (!name) {
+      return;
+    }
+
+    if (spotifyUrl) {
+      const link = document.createElement("a");
+      link.className = "content-chip influences__chip";
+      link.href = spotifyUrl;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = name;
+      link.setAttribute("aria-label", `Open ${name} on Spotify`);
+      item.append(link);
+    } else {
+      const chip = document.createElement("span");
+      chip.className = "content-chip influences__chip";
+      chip.textContent = name;
+      item.append(chip);
+    }
+
     listEl.append(item);
   });
 }

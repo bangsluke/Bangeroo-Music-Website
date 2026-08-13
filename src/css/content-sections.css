@@ -1,11 +1,20 @@
 .ep-release {
   display: grid;
   gap: var(--space-md);
-  margin-bottom: var(--space-lg);
   padding: var(--space-md);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   background: linear-gradient(145deg, rgba(19, 34, 87, 0.35), rgba(0, 0, 0, 0.85));
+}
+
+.ep-release__content {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.ep-release .track-card {
+  background: rgba(0, 0, 0, 0.45);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .ep-release__header {
@@ -52,6 +61,16 @@
   color: var(--color-text-primary);
   font-size: 0.9rem;
   letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: border-color var(--transition-fast), color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+a.content-chip:hover,
+a.content-chip:focus-visible {
+  border-color: var(--color-accent-secondary);
+  color: var(--color-accent-secondary);
+  background: rgba(19, 34, 87, 0.55);
 }
 
 .ep-release__artwork {
