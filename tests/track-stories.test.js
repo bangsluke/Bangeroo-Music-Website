@@ -55,6 +55,6 @@ describe("track stories and lyrics modal", () => {
   });
 
   it("finds tracks by id for the lyrics modal", () => {
-    expect(__testables__.findTrackById("rewilding")?.title).toBe("Re-wilding");
+    expect(__testables__.findTrackById("rewilding")?.title).toBe("Re-Wilding");
   });
 });

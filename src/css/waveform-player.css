@@ -40,14 +40,24 @@
   font-size: 0.95rem;
 }
 
-.track-card__moods {
-  margin-left: 0.35rem;
+.track-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.45rem;
+  margin: 0.35rem 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
 }
 
-.track-card__mood-tag {
+.track-card__meta-chip {
   color: rgba(255, 255, 255, 0.45);
-  font-size: 0.82em;
   letter-spacing: 0.02em;
+}
+
+.track-card__meta-sep,
+.track-card__meta-divider {
+  color: rgba(255, 255, 255, 0.35);
 }
 
 .track-card__actions {

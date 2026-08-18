@@ -5,9 +5,12 @@ export const tracks = [
     artist: "Bangeroo",
     filename: "Real 20Feb26.mp3",
     duration: "0:00",
+    key: "G Major",
+    bpm: 128,
+    genre: "Indie Rock",
+    subGenre: "Pop Soft Rock",
     story:
-      "This track started with a late-night rhythm loop and grew into a full-frequency wall of sound.",
-    mood: ["wired", "chaos"],
+      "Real reflects on a deeply personal moment in time when I had to persuade my partner I was worth taking on – emotional and building to crescendo",
     downloadable: true,
     lyrics: [
       [
@@ -50,9 +53,12 @@ export const tracks = [
     // Interim: reuse Real audio until Crashlanding MP3 is added to public/songs/
     filename: "Real 20Feb26.mp3",
     duration: "0:00",
+    key: "E minor",
+    bpm: 135,
+    genre: "Post-rock",
+    subGenre: "Indie",
     story:
-      "This track started with a late-night rhythm loop and grew into a full-frequency wall of sound.",
-    mood: ["wired", "chaos"],
+      "Crashlanding is a post-punk reflection on luck finally running out, driven by heavy guitars and bass",
     downloadable: true,
     lyrics: [
       [
@@ -99,14 +105,17 @@ export const tracks = [
   },
   {
     id: "rewilding",
-    title: "Re-wilding",
+    title: "Re-Wilding",
     artist: "Bangeroo",
-    // Interim: reuse Real audio until Re-wilding MP3 is added to public/songs/
+    // Interim: reuse Real audio until Re-Wilding MP3 is added to public/songs/
     filename: "Real 20Feb26.mp3",
     duration: "0:00",
+    key: "G Major",
+    bpm: 95,
+    genre: "Indie/Alternative",
+    subGenre: "Anti-folk",
     story:
-      "This track started with a late-night rhythm loop and grew into a full-frequency wall of sound.",
-    mood: ["wired", "chaos"],
+      "Re-Wilding is an upbeat, guitar-driven request for someone to take their wilder side more seriously – positive, jangly and rhythmic",
     downloadable: true,
     lyrics: [
       [
@@ -165,9 +174,12 @@ export const tracks = [
     // Interim: reuse Real audio until It's Not Fair MP3 is added to public/songs/
     filename: "Real 20Feb26.mp3",
     duration: "0:00",
+    key: "C minor",
+    bpm: 120,
+    genre: "Experimental Rock",
+    subGenre: "Minimal",
     story:
-      "This track started with a late-night rhythm loop and grew into a full-frequency wall of sound.",
-    mood: ["wired", "chaos"],
+      "It's Not Fair is about the end of a relationship, firstly a whine, then something more like anger before reverting back to whine - more experimental and synth-driven",
     downloadable: true,
     lyrics: [
       [
