@@ -63,4 +63,6 @@
   --radius-lg: 1.25rem;
   --transition-fast: 150ms ease;
   --transition-base: 300ms ease;
+  --section-nav-height: 3.75rem;
+  --section-scroll-offset: calc(var(--section-nav-height) + var(--space-sm));
 }

@@ -102,15 +102,13 @@ function renderTrackMeta(track) {
 function renderTrackCard(track) {
   const card = document.createElement("article");
   card.className = "track-card";
+  card.id = `track-${track.id}`;
   card.dataset.trackId = track.id;
   const metaLine = renderTrackMeta(track);
   card.innerHTML = `
     <div class="track-card__head">
       <div>
         <h3 class="track-card__title">${track.title}</h3>
-        <p class="track-card__artist">
-          <span class="track-card__artist-name">${track.artist}</span>
-        </p>
         ${metaLine}
       </div>
       <div class="track-card__actions">
@@ -164,6 +162,27 @@ function connectAnalyserFromWave(waveSurfer) {
   }
 }
 
+function playNext(currentId) {
+  const index = instances.findIndex((item) => item.id === currentId);
+  if (index < 0 || index >= instances.length - 1) {
+    return false;
+  }
+
+  const next = instances[index + 1];
+  next.waveSurfer.play();
+  return true;
+}
+
+export function playTrackById(trackId) {
+  const item = instances.find((entry) => entry.id === trackId);
+  if (!item) {
+    return false;
+  }
+
+  item.waveSurfer.play();
+  return true;
+}
+
 export function initWaveformPlayer() {
   const mount = document.querySelector("#waveform-player");
   if (!mount) {
@@ -171,6 +190,7 @@ export function initWaveformPlayer() {
   }
 
   mount.classList.add("waveform-player");
+  instances.length = 0;
 
   tracks.forEach((track) => {
     const card = renderTrackCard(track);
@@ -233,7 +253,9 @@ export function initWaveformPlayer() {
     waveSurfer.on("finish", () => {
       setPlayButtonState(playButton, false);
       card.classList.remove("is-playing");
-      stopAudioReactiveCss();
+      if (!playNext(track.id)) {
+        stopAudioReactiveCss();
+      }
     });
 
     playButton.addEventListener("click", () => waveSurfer.playPause());
@@ -242,5 +264,8 @@ export function initWaveformPlayer() {
 
 export const __testables__ = {
   renderTrackMeta,
-  renderTrackCard
+  renderTrackCard,
+  playNext,
+  playTrackById,
+  getInstances: () => instances
 };

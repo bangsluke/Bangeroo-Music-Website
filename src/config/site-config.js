@@ -13,7 +13,7 @@ export const siteConfig = {
     blurb:
       "Finally is the first collection of songs released by Bangeroo. As they have all been noodled with over a long period of time, there isn't a lot to connect them and the styles are varied, being (apparently): Anti-folk, Indie Rock, Post-rock and Experimental Rock. Apparently, one sounds like Nick Cave and Bauhaus – if only!",
     genres: ["Anti-folk", "Indie Rock", "Post-rock", "Experimental Rock"],
-    artwork: null,
+    artwork: "/images/finally/Finally EP cover.png",
     artworkNote: "Artwork for EP cover to be added when finalised"
   },
   influences: {

@@ -3,7 +3,7 @@ export const tracks = [
     id: "real",
     title: "Real",
     artist: "Bangeroo",
-    filename: "Real 20Feb26.mp3",
+    filename: "Real.mp3",
     duration: "0:00",
     key: "G Major",
     bpm: 128,
@@ -50,8 +50,7 @@ export const tracks = [
     id: "crashlanding",
     title: "Crashlanding",
     artist: "Bangeroo",
-    // Interim: reuse Real audio until Crashlanding MP3 is added to public/songs/
-    filename: "Real 20Feb26.mp3",
+    filename: "Crashlanding.mp3",
     duration: "0:00",
     key: "E minor",
     bpm: 135,
@@ -107,8 +106,7 @@ export const tracks = [
     id: "rewilding",
     title: "Re-Wilding",
     artist: "Bangeroo",
-    // Interim: reuse Real audio until Re-Wilding MP3 is added to public/songs/
-    filename: "Real 20Feb26.mp3",
+    filename: "Re-wilding.mp3",
     duration: "0:00",
     key: "G Major",
     bpm: 95,
@@ -171,8 +169,7 @@ export const tracks = [
     id: "its-not-fair",
     title: "It's Not Fair",
     artist: "Bangeroo",
-    // Interim: reuse Real audio until It's Not Fair MP3 is added to public/songs/
-    filename: "Real 20Feb26.mp3",
+    filename: "It's Not Fair.mp3",
     duration: "0:00",
     key: "C minor",
     bpm: 120,

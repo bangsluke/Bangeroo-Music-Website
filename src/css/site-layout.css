@@ -72,7 +72,6 @@
 }
 
 .site .section-nav {
-  --section-nav-height: 3.75rem;
   position: fixed;
   top: 0;
   left: 0;
@@ -137,6 +136,25 @@
 .site .nav-link:focus-visible {
   border-color: var(--color-accent-secondary);
   transform: translateY(-1px);
+}
+
+.site .nav-link.is-active,
+.site .nav-link[aria-current="true"] {
+  border-color: var(--color-accent-secondary);
+  background: rgba(19, 34, 87, 0.55);
+  transform: none;
+}
+
+.site #music,
+.site #influences,
+.site #gallery,
+.site #gigs,
+.site #guestbook {
+  scroll-margin-top: var(--section-scroll-offset);
+}
+
+.site .track-card {
+  scroll-margin-top: var(--section-scroll-offset);
 }
 
 .site .nav-toggle {

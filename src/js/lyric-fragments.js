@@ -57,7 +57,7 @@ export function initLyricFragments(siteConfig) {
     );
     window.setTimeout(() => {
       placeNodeRandomly(node);
-      node.style.opacity = String(clamp(randomInRange(0.5, 0.82), 0.5, 0.82));
+      node.style.opacity = String(clamp(randomInRange(0.25, 0.41), 0.25, 0.41));
       node.classList.add("is-active");
 
       const visibleFor = randomInRange(

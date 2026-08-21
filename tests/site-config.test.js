@@ -20,6 +20,7 @@ describe("site config shape", () => {
     expect(siteConfig.artist).toHaveProperty("bioClosing");
     expect(siteConfig).toHaveProperty("ep");
     expect(siteConfig.ep.genres).toHaveLength(4);
+    expect(siteConfig.ep.artwork).toBe("/images/finally/Finally EP cover.png");
     expect(siteConfig).toHaveProperty("influences");
     expect(siteConfig.influences.artists).toHaveLength(20);
     expect(siteConfig).toHaveProperty("credits");

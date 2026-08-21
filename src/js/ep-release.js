@@ -1,3 +1,5 @@
+import { tracks } from "../config/track-data.js";
+
 function renderArtwork(ep) {
   if (ep.artwork) {
     const figure = document.createElement("figure");
@@ -16,7 +18,41 @@ function renderArtwork(ep) {
   return placeholder;
 }
 
-function renderEpRelease(contentMount, ep) {
+function renderTracklist(trackList = tracks) {
+  const list = document.createElement("ol");
+  list.className = "ep-release__tracklist";
+  list.setAttribute("aria-label", "EP track listing");
+
+  trackList.forEach((track, index) => {
+    const item = document.createElement("li");
+    item.className = "ep-release__track";
+
+    const number = document.createElement("span");
+    number.className = "ep-release__track-number";
+    number.textContent = String(index + 1).padStart(2, "0");
+
+    const title = document.createElement("a");
+    title.className = "ep-release__track-title";
+    title.href = `#track-${track.id}`;
+    title.setAttribute("data-scroll-link", "");
+    title.setAttribute("data-play-track", track.id);
+    title.textContent = track.title;
+
+    item.append(number, title);
+    list.append(item);
+  });
+
+  return list;
+}
+
+function renderCoverRow(ep, trackList = tracks) {
+  const row = document.createElement("div");
+  row.className = "ep-release__cover-row";
+  row.append(renderArtwork(ep), renderTracklist(trackList));
+  return row;
+}
+
+function renderEpRelease(contentMount, ep, trackList = tracks) {
   contentMount.classList.add("ep-release__content");
   contentMount.innerHTML = "";
 
@@ -37,16 +73,7 @@ function renderEpRelease(contentMount, ep) {
   blurb.className = "ep-release__blurb";
   blurb.textContent = ep.blurb || "";
 
-  const genres = document.createElement("ul");
-  genres.className = "ep-release__genres content-chips";
-  (ep.genres || []).forEach((genre) => {
-    const item = document.createElement("li");
-    item.className = "content-chip";
-    item.textContent = genre;
-    genres.append(item);
-  });
-
-  contentMount.append(header, blurb, genres, renderArtwork(ep));
+  contentMount.append(header, blurb, renderCoverRow(ep, trackList));
 }
 
 export function initEpRelease(siteConfig) {
@@ -67,5 +94,7 @@ export function initEpRelease(siteConfig) {
 
 export const __testables__ = {
   renderEpRelease,
-  renderArtwork
+  renderArtwork,
+  renderTracklist,
+  renderCoverRow
 };

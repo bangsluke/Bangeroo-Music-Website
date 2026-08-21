@@ -6,6 +6,36 @@ body {
   font-size: var(--font-size-body);
 }
 
+html,
+.lyrics-modal__body {
+  color-scheme: dark;
+  scrollbar-width: thin;
+  scrollbar-color: var(--palette-mushroom) var(--palette-black);
+}
+
+html::-webkit-scrollbar,
+.lyrics-modal__body::-webkit-scrollbar {
+  width: 0.65rem;
+  height: 0.65rem;
+}
+
+html::-webkit-scrollbar-track,
+.lyrics-modal__body::-webkit-scrollbar-track {
+  background: var(--palette-navy-blue);
+}
+
+html::-webkit-scrollbar-thumb,
+.lyrics-modal__body::-webkit-scrollbar-thumb {
+  background: var(--palette-mushroom);
+  border-radius: 999px;
+  border: 2px solid var(--palette-navy-blue);
+}
+
+html::-webkit-scrollbar-thumb:hover,
+.lyrics-modal__body::-webkit-scrollbar-thumb:hover {
+  background: var(--palette-yellow);
+}
+
 body {
   position: relative;
   overflow-x: hidden;

@@ -34,12 +34,6 @@
   font-size: 1.2rem;
 }
 
-.track-card__artist {
-  margin: 0.2rem 0 0;
-  color: var(--color-text-secondary);
-  font-size: 0.95rem;
-}
-
 .track-card__meta {
   display: flex;
   flex-wrap: wrap;

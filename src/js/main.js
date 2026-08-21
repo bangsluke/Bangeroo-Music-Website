@@ -6,7 +6,7 @@ import { initGlitchEffects } from "./glitch.js";
 import { loadSiteConfig } from "./site-config.js";
 import { initLogoGlitch } from "./logo-glitch.js";
 import { initChaosEffects } from "./chaos-effects.js";
-import { initWaveformPlayer } from "./waveform-player.js";
+import { initWaveformPlayer, playTrackById } from "./waveform-player.js";
 import { initTrackStories } from "./track-stories.js";
 import { initColourRandomiser } from "./colour-randomiser.js";
 import { initSpotifyNowPlaying } from "./spotify-now-playing.js";
@@ -66,6 +66,8 @@ function initSectionNav() {
     closeMenu();
   });
 
+  const getScrollOffset = () => navRoot.getBoundingClientRect().height + 8;
+
   const smoothScrollToHash = (hash) => {
     if (!hash || !hash.startsWith("#")) {
       return false;
@@ -75,7 +77,8 @@ function initSectionNav() {
       return false;
     }
 
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    const top = Math.max(0, getDocumentTop(target) - getScrollOffset());
+    window.scrollTo({ top, behavior: "smooth" });
     history.pushState(null, "", hash);
     return true;
   };
@@ -94,7 +97,121 @@ function initSectionNav() {
     event.preventDefault();
     closeMenu();
     smoothScrollToHash(href);
+
+    const playTrackId = link.getAttribute("data-play-track");
+    if (playTrackId) {
+      playTrackById(playTrackId);
+    }
   });
+
+  initDesktopNavScrollSpy(navRoot);
+}
+
+function findActiveNavSectionId(scrollY, headerOffset, sectionTops, heroBottom) {
+  if (Number.isFinite(heroBottom) && scrollY + headerOffset < heroBottom) {
+    return null;
+  }
+
+  let activeId = null;
+  for (const entry of sectionTops) {
+    if (entry.top <= scrollY + headerOffset) {
+      activeId = entry.id;
+    }
+  }
+  return activeId;
+}
+
+function getDocumentTop(element) {
+  return element.getBoundingClientRect().top + (window.scrollY || window.pageYOffset || 0);
+}
+
+function initDesktopNavScrollSpy(navRoot) {
+  const desktopLinks = Array.from(navRoot.querySelectorAll(".nav-links .nav-link[href^='#']"));
+  if (desktopLinks.length === 0) {
+    return;
+  }
+
+  const sections = desktopLinks
+    .map((link) => {
+      const href = link.getAttribute("href") || "";
+      const section = document.querySelector(href);
+      return section instanceof HTMLElement ? { link, section, id: href.slice(1) } : null;
+    })
+    .filter(Boolean);
+
+  if (sections.length === 0) {
+    return;
+  }
+
+  const hero = document.querySelector("#top");
+  const desktopQuery = window.matchMedia("(min-width: 768px)");
+  let rafId = 0;
+
+  const clearActive = () => {
+    desktopLinks.forEach((link) => {
+      link.classList.remove("is-active");
+      link.removeAttribute("aria-current");
+    });
+  };
+
+  const setActiveById = (activeId) => {
+    desktopLinks.forEach((link) => {
+      const href = link.getAttribute("href") || "";
+      const isActive = activeId !== null && href === `#${activeId}`;
+      link.classList.toggle("is-active", isActive);
+      if (isActive) {
+        link.setAttribute("aria-current", "true");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+  };
+
+  const getScrollOffset = () => navRoot.getBoundingClientRect().height + 8;
+
+  const updateActiveSection = () => {
+    if (!desktopQuery.matches) {
+      clearActive();
+      return;
+    }
+
+    const headerOffset = getScrollOffset();
+    const scrollY = window.scrollY || window.pageYOffset || 0;
+    const heroBottom =
+      hero instanceof HTMLElement
+        ? getDocumentTop(hero) + hero.getBoundingClientRect().height
+        : Number.NaN;
+    const sectionTops = sections.map((entry) => ({
+      id: entry.id,
+      top: getDocumentTop(entry.section)
+    }));
+    const activeId = findActiveNavSectionId(scrollY, headerOffset, sectionTops, heroBottom);
+
+    if (activeId) {
+      setActiveById(activeId);
+    } else {
+      clearActive();
+    }
+  };
+
+  const scheduleUpdate = () => {
+    if (rafId) {
+      return;
+    }
+    rafId = window.requestAnimationFrame(() => {
+      rafId = 0;
+      updateActiveSection();
+    });
+  };
+
+  window.addEventListener("scroll", scheduleUpdate, { passive: true });
+  window.addEventListener("resize", scheduleUpdate);
+  if (typeof desktopQuery.addEventListener === "function") {
+    desktopQuery.addEventListener("change", scheduleUpdate);
+  } else if (typeof desktopQuery.addListener === "function") {
+    desktopQuery.addListener(scheduleUpdate);
+  }
+  updateActiveSection();
 }
 
 function initHeaderBrandReveal() {
@@ -307,5 +424,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 export const __testables__ = {
   initSectionNav,
+  initDesktopNavScrollSpy,
+  findActiveNavSectionId,
+  getDocumentTop,
   applySiteConfig
 };
