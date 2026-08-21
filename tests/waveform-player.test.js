@@ -46,15 +46,22 @@ describe("track card metadata", () => {
       subGenre: "Pop Soft Rock"
     });
 
+    const heading = card.querySelector(".track-card__heading");
     const meta = card.querySelector(".track-card__meta");
-    const chips = card.querySelectorAll(".track-card__meta-chip");
+    const chipsWrap = meta.querySelector(".track-card__meta-chips");
+    const chips = chipsWrap.querySelectorAll(".track-card__meta-chip");
 
     expect(card.querySelector(".track-card__title").textContent).toBe("Real");
     expect(card.id).toBe("track-real");
     expect(card.querySelector(".track-card__artist")).toBeNull();
     expect(card.querySelector(".track-card__artist-name")).toBeNull();
+    expect(heading).not.toBeNull();
+    expect(heading.querySelector(".track-card__title")).not.toBeNull();
+    expect(heading.querySelector(".track-card__actions")).not.toBeNull();
+    expect(heading.contains(meta)).toBe(false);
     expect(meta).not.toBeNull();
     expect(meta.querySelector(".track-card__meta-facts").textContent).toBe("G Major · 128 BPM");
+    expect(chipsWrap).not.toBeNull();
     expect(chips).toHaveLength(2);
     expect(chips[0].textContent).toBe("Indie Rock");
     expect(chips[1].textContent).toBe("Pop Soft Rock");

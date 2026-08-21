@@ -136,7 +136,7 @@ export const siteConfig = {
   },
   spotify: {
     nowPlayingEndpoint: "/.netlify/functions/spotify-now-playing",
-    pollIntervalMs: 30000
+    pollIntervalMs: 15000
   },
   palettes: [
     {

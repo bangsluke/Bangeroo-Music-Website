@@ -70,9 +70,9 @@ function renderGenreChips(track) {
     return "";
   }
 
-  return labels
+  return `<span class="track-card__meta-chips">${labels
     .map((label) => `<span class="track-card__meta-chip">${label}</span>`)
-    .join(` <span class="track-card__meta-divider" aria-hidden="true">/</span> `);
+    .join(` <span class="track-card__meta-divider" aria-hidden="true">/</span> `)}</span>`;
 }
 
 function renderTrackMeta(track) {
@@ -107,16 +107,16 @@ function renderTrackCard(track) {
   const metaLine = renderTrackMeta(track);
   card.innerHTML = `
     <div class="track-card__head">
-      <div>
+      <div class="track-card__heading">
         <h3 class="track-card__title">${track.title}</h3>
-        ${metaLine}
+        <div class="track-card__actions">
+          <button type="button" class="track-card__button" data-action="play" aria-label="Play track">
+            ${PLAY_ICON}
+          </button>
+          <span class="track-card__time" data-role="time">0:00 / --:--</span>
+        </div>
       </div>
-      <div class="track-card__actions">
-        <button type="button" class="track-card__button" data-action="play" aria-label="Play track">
-          ${PLAY_ICON}
-        </button>
-        <span class="track-card__time" data-role="time">0:00 / --:--</span>
-      </div>
+      ${metaLine}
     </div>
     <div class="track-card__player-row">
       <div class="track-card__wave" id="wave-${track.id}"></div>

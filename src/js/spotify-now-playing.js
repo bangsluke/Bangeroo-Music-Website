@@ -41,7 +41,7 @@ export function initSpotifyNowPlaying(siteConfig) {
     });
   };
 
-  const pollMs = Math.max(5000, Number(siteConfig.spotify.pollIntervalMs) || 30000);
+  const pollMs = Math.max(5000, Number(siteConfig.spotify.pollIntervalMs) || 15000);
   console.log("[spotify-now-playing-ui] Initializing poller", {
     endpoint,
     pollMs
@@ -50,7 +50,7 @@ export function initSpotifyNowPlaying(siteConfig) {
   const refresh = async () => {
     console.log("[spotify-now-playing-ui] Polling endpoint", { endpoint });
     try {
-      const response = await fetch(endpoint);
+      const response = await fetch(endpoint, { cache: "no-store" });
       if (!response.ok) {
         applyOfflineState(`HTTP ${response.status}`);
         return;

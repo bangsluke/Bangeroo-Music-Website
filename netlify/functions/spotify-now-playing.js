@@ -3,7 +3,7 @@ function response(statusCode, body) {
     statusCode,
     headers: {
       "content-type": "application/json",
-      "cache-control": "public, s-maxage=30",
+      "cache-control": "no-store",
       "access-control-allow-origin": "*"
     },
     body: JSON.stringify(body)

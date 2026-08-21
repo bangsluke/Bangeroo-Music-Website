@@ -22,16 +22,21 @@
 }
 
 .track-card__head {
-  display: flex;
-  justify-content: space-between;
-  align-items: start;
-  gap: var(--space-md);
   margin-bottom: var(--space-sm);
+}
+
+.track-card__heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
 }
 
 .track-card__title {
   margin: 0;
   font-size: 1.2rem;
+  white-space: nowrap;
 }
 
 .track-card__meta {
@@ -42,6 +47,17 @@
   margin: 0.35rem 0 0;
   color: var(--color-text-secondary);
   font-size: 0.82rem;
+}
+
+.track-card__meta-facts {
+  white-space: nowrap;
+}
+
+.track-card__meta-chips {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem 0.45rem;
+  white-space: nowrap;
 }
 
 .track-card__meta-chip {
@@ -58,6 +74,8 @@
   display: flex;
   align-items: center;
   gap: var(--space-sm);
+  flex-shrink: 0;
+  margin-left: auto;
 }
 
 .track-card__button,
