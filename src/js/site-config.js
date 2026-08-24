@@ -1,6 +1,11 @@
 import { siteConfig as appSiteConfig } from "../config/site-config.js";
 
 const DEFAULT_CONFIG = {
+  comingSoon: {
+    enabled: false,
+    headline: "Finally Coming Soon",
+    dateLabel: "11th September 2026"
+  },
   contact: {
     email: "placeholder@email.com",
     phone: "+440000000000"
@@ -107,6 +112,10 @@ function mergeConfig(config) {
     visitorCounter: {
       ...DEFAULT_CONFIG.visitorCounter,
       ...config?.visitorCounter
+    },
+    comingSoon: {
+      ...DEFAULT_CONFIG.comingSoon,
+      ...config?.comingSoon
     }
   };
 }

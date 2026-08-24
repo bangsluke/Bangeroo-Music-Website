@@ -3,6 +3,8 @@ import { siteConfig } from "../src/config/site-config.js";
 
 describe("site config shape", () => {
   it("contains v2 required keys", () => {
+    expect(siteConfig).toHaveProperty("comingSoon");
+    expect(siteConfig.comingSoon).toHaveProperty("enabled");
     expect(siteConfig).toHaveProperty("contact");
     expect(siteConfig).toHaveProperty("streamingLinks");
     expect(siteConfig).toHaveProperty("spotifyEmbed");

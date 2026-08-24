@@ -1,0 +1,59 @@
+#coming-soon {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: grid;
+  place-items: center;
+  pointer-events: auto;
+  padding: var(--space-lg) var(--space-md);
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.62)),
+    radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.12), transparent 36%);
+}
+
+#coming-soon[hidden] {
+  display: none;
+}
+
+.coming-soon__content {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: var(--space-md);
+  width: min(56rem, 100%);
+}
+
+.coming-soon__headline {
+  margin: 0;
+  font-family: var(--font-family-heading);
+  font-size: clamp(1.8rem, 6vw, 4.5rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+  line-height: 0.95;
+}
+
+.coming-soon__date {
+  margin: 0;
+  font-family: var(--font-family-terminal);
+  font-size: clamp(1.25rem, 3.4vw, 2.25rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent-secondary);
+}
+
+html.coming-soon-active,
+body.coming-soon-active {
+  overflow: hidden;
+  height: 100%;
+  overscroll-behavior: none;
+}
+
+body.coming-soon-active .section-nav,
+body.coming-soon-active .hero-content,
+body.coming-soon-active main,
+body.coming-soon-active .site-footer,
+body.coming-soon-active #lyric-fragments-layer {
+  visibility: hidden;
+  pointer-events: none;
+}

@@ -1,4 +1,9 @@
 export const siteConfig = {
+  comingSoon: {
+    enabled: true, // set false on release day to reveal the site
+    headline: "Finally Coming Soon",
+    dateLabel: "11th September 2026"
+  },
   contact: {
     email: "martinbangs@hotmail.com",
     phone: "+447903250331"

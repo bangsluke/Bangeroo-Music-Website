@@ -11,6 +11,7 @@ import { initTrackStories } from "./track-stories.js";
 import { initColourRandomiser } from "./colour-randomiser.js";
 import { initSpotifyNowPlaying } from "./spotify-now-playing.js";
 import { initVhsIntro } from "./vhs-intro.js";
+import { initComingSoon } from "./coming-soon.js";
 import { initLyricFragments } from "./lyric-fragments.js";
 import { initVisitorCounter } from "./visitor-counter.js";
 import { initGuestbook } from "./guestbook.js";
@@ -397,6 +398,7 @@ function applySiteConfig(config) {
 document.addEventListener("DOMContentLoaded", async () => {
   const siteConfig = await loadSiteConfig();
   applySiteConfig(siteConfig);
+  initComingSoon(siteConfig);
 
   initAnalytics();
   initLazyLoad();
