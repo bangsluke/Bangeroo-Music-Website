@@ -33,8 +33,7 @@ export function initSpotifyNowPlaying(siteConfig) {
     root.setAttribute("aria-label", message);
   };
 
-  const applyOfflineState = (reason) => {
-    console.log("[spotify-now-playing-ui] Offline state", { reason });
+  const applyOfflineState = () => {
     targets.forEach(({ root, dot, textNode, wrap, mode }) => {
       renderOffline(dot, textNode, wrap, mode);
       setTooltip(root, "MB Offline on Spotify.");
@@ -42,21 +41,15 @@ export function initSpotifyNowPlaying(siteConfig) {
   };
 
   const pollMs = Math.max(5000, Number(siteConfig.spotify.pollIntervalMs) || 15000);
-  console.log("[spotify-now-playing-ui] Initializing poller", {
-    endpoint,
-    pollMs
-  });
 
   const refresh = async () => {
-    console.log("[spotify-now-playing-ui] Polling endpoint", { endpoint });
     try {
       const response = await fetch(endpoint, { cache: "no-store" });
       if (!response.ok) {
-        applyOfflineState(`HTTP ${response.status}`);
+        applyOfflineState();
         return;
       }
       const data = await response.json();
-      console.log("[spotify-now-playing-ui] Endpoint response", data);
       if (data?.isPlaying) {
         const artist = data.artist || "Unknown artist";
         const track = data.track || "Unknown track";
@@ -67,13 +60,11 @@ export function initSpotifyNowPlaying(siteConfig) {
           textNode.textContent = mode === "hero" ? `MB Online - ${artist} - ${track}` : "MB Online";
           setTooltip(root, `Now playing: ${artist} - ${track}`);
         });
-        console.log("[spotify-now-playing-ui] Online state", { artist, track });
         return;
       }
-      const reason = data?.error ? `API error: ${data.error}` : "No active playback";
-      applyOfflineState(reason);
-    } catch (error) {
-      applyOfflineState(error?.message || "Network error");
+      applyOfflineState();
+    } catch {
+      applyOfflineState();
     }
   };
 

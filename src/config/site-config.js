@@ -1,6 +1,6 @@
 export const siteConfig = {
   comingSoon: {
-    enabled: true, // set false on release day to reveal the site
+    enabled: false, // set false on release day to reveal the site
     headline: "Finally Coming Soon",
     dateLabel: "11th September 2026"
   },
@@ -112,19 +112,19 @@ export const siteConfig = {
     intro: "In my musical journey so far, big thanks are merited to:",
     people: [
       {
-        name: "Linn Sandin",
+        name: "Linn",
         role: "my awesome vocal coach, making lemon juice out of concentrated and out of date lemons"
       },
       {
-        name: "Luke Bangs",
+        name: "Luke",
         role: "website, critical feedback"
       },
       {
-        name: "Malcolm Dunleavy",
+        name: "Malcolm",
         role: "musical huge nous to learn from and perfectionism to avoid"
       },
       {
-        name: "Andrea Bangs",
+        name: "Andrea",
         role: "everything else"
       }
     ]
@@ -198,7 +198,13 @@ export const siteConfig = {
     50: "50 souls have entered the frequency",
     100: "100 legends have visited",
     500: "Half a thousand. We see you.",
-    1000: "You are visitor 1,000 - tell no one"
+    1000: "You are visitor 1,000 - tell no one",
+    5000: "5000 visitors. This is madness.",
+    10000: "10,000 visitors. This is insanity.",
+    50000: "50,000 visitors. This is epic.",
+    100000: "100,000 visitors. This is legendary.",
+    500000: "500,000 visitors. This is神话.",
+    1000000: "1,000,000 visitors. This is终极."
   },
   guestbook: {
     maxLength: 100,

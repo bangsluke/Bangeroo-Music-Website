@@ -12,9 +12,12 @@
 ## Umami Analytics
 
 1. Create an Umami Cloud account and create a website project.
-2. Copy the website ID.
-3. In `src/index.html`, replace `UMAMI_WEBSITE_ID` in the Umami script tag.
-4. Optional: add more custom events by calling `trackEvent()` in `src/js/analytics.js`.
+2. Copy the website ID (UUID).
+3. Set `VITE_UMAMI_WEBSITE_ID` in a local `.env` file and in Netlify env vars (build-time).
+4. Restart `npm run dev` / redeploy so Vite picks up the value.
+5. Optional: add more custom events by calling `trackEvent()` in `src/js/analytics.js`.
+
+Until a valid UUID is set, analytics stays disabled so localhost does not spam `gateway.umami.is` 400 errors.
 
 ## Google Apps Script
 
