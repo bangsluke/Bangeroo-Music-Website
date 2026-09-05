@@ -18,6 +18,7 @@ import { initGuestbook } from "./guestbook.js";
 import { initEpRelease } from "./ep-release.js";
 import { initInfluences } from "./influences.js";
 import { initCredits } from "./credits.js";
+import { initReviews } from "./reviews.js";
 
 function initSectionNav() {
   const navRoot = document.querySelector(".section-nav");
@@ -414,6 +415,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   initWaveformPlayer(siteConfig);
   initTrackStories();
   initEpRelease(siteConfig);
+  initReviews(siteConfig);
   initInfluences(siteConfig);
   initCredits(siteConfig);
   initVhsIntro();

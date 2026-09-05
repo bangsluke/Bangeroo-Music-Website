@@ -42,6 +42,10 @@
   line-height: 1.55;
 }
 
+.ep-release__reviews {
+  width: 100%;
+}
+
 .content-chips {
   display: flex;
   flex-wrap: wrap;

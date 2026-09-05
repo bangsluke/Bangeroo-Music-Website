@@ -72,6 +72,7 @@ describe("ep release section", () => {
     __testables__.renderEpRelease(mount, baseEp);
     expect(mount.querySelectorAll(".content-chip")).toHaveLength(0);
     expect(mount.querySelector(".ep-release__title").textContent).toBe("Finally");
+    expect(mount.querySelector("#ep-reviews")).not.toBeNull();
   });
 
   it("lists numbered tracks beside the cover", () => {

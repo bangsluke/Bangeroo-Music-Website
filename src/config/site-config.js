@@ -129,6 +129,35 @@ export const siteConfig = {
       }
     ]
   },
+  reviews: {
+    intro:
+      "The following is a selection of real phrases used by reviewers of my first songs.",
+    laughIntro: "Firstly, the positive ones that made me laugh:",
+    positive: [
+      "shades of the Fall",
+      "influence of Japan and David Sylvian",
+      "fascinating work that calls for attentive listening",
+      "unique underground vibe",
+      "super cool stuff",
+      "epic voice",
+      "pleasant and harmonious",
+      "charming DIY feel",
+      "incredibly moving, drenched with emotion"
+    ],
+    paidIntro:
+      "Given that I had to pay for the reviews, the following quotes are probably more relevant:",
+    negative: [
+      "too leftfield",
+      "quite danceable",
+      "not distinctive",
+      "too harsh",
+      "didn’t fall under the spell of the song",
+      "not catchy",
+      "needs a faster tempo, rockier style and a stronger vocal performance",
+      "quite amateurish – sounds a bit like something made by AI"
+    ],
+    punchline: "And I remember - I PAID these people"
+  },
   streamingLinks: {
     spotify: "https://open.spotify.com/artist/0gXu1oMsNf8fnRY0NPCoSw",
     soundcloud: "https://soundcloud.com/PLACEHOLDER-TBC",

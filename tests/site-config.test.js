@@ -27,6 +27,13 @@ describe("site config shape", () => {
     expect(siteConfig.influences.artists).toHaveLength(20);
     expect(siteConfig).toHaveProperty("credits");
     expect(siteConfig.credits.people).toHaveLength(4);
+    expect(siteConfig).toHaveProperty("reviews");
+    expect(siteConfig.reviews).toHaveProperty("intro");
+    expect(siteConfig.reviews).toHaveProperty("laughIntro");
+    expect(siteConfig.reviews).toHaveProperty("paidIntro");
+    expect(siteConfig.reviews).toHaveProperty("punchline");
+    expect(siteConfig.reviews.positive).toHaveLength(9);
+    expect(siteConfig.reviews.negative).toHaveLength(8);
   });
 
   it("includes Spotify URLs for every influence artist", () => {

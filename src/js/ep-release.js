@@ -73,7 +73,12 @@ function renderEpRelease(contentMount, ep, trackList = tracks) {
   blurb.className = "ep-release__blurb";
   blurb.textContent = ep.blurb || "";
 
-  contentMount.append(header, blurb, renderCoverRow(ep, trackList));
+  const reviewsMount = document.createElement("div");
+  reviewsMount.id = "ep-reviews";
+  reviewsMount.className = "ep-release__reviews";
+  reviewsMount.setAttribute("aria-label", "Paid review phrases");
+
+  contentMount.append(header, blurb, reviewsMount, renderCoverRow(ep, trackList));
 }
 
 export function initEpRelease(siteConfig) {
