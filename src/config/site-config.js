@@ -1,6 +1,6 @@
 export const siteConfig = {
   comingSoon: {
-    enabled: false, // set false on release day to reveal the site
+    enabled: true, // set false on release day to reveal the site
     headline: "Finally Coming Soon",
     dateLabel: "11th September 2026"
   },
