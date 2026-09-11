@@ -267,6 +267,43 @@ body.lyrics-modal-open {
   display: block;
 }
 
+.streaming-link--pending {
+  position: relative;
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+.streaming-link--pending img {
+  opacity: 0.45;
+}
+
+.streaming-link--pending::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 0.55rem);
+  transform: translateX(-50%) translateY(0.25rem);
+  padding: 0.4rem 0.65rem;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+  color: var(--color-accent-secondary);
+  border: 1px solid var(--color-border);
+  font-family: var(--font-family-heading);
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms ease, transform 150ms ease;
+  z-index: 2;
+}
+
+.streaming-link--pending:hover::after,
+.streaming-link--pending:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 @media (max-width: 767px) {
   .streaming-link img {
     height: 40px;
@@ -274,8 +311,8 @@ body.lyrics-modal-open {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .streaming-link:hover img,
-  .streaming-link:focus-visible img {
+  .streaming-link:not(.streaming-link--pending):hover img,
+  .streaming-link:not(.streaming-link--pending):focus-visible img {
     animation: stream-pulse 650ms ease-in-out;
   }
 

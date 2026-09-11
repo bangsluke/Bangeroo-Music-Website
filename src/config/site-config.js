@@ -1,6 +1,6 @@
 export const siteConfig = {
   comingSoon: {
-    enabled: true, // set false on release day to reveal the site
+    enabled: false, // set false on release day to reveal the site
     headline: "Finally Coming Soon",
     dateLabel: "11th September 2026"
   },
@@ -19,7 +19,9 @@ export const siteConfig = {
       "Finally is the first collection of songs released by Bangeroo. As they have all been noodled with over a long period of time, there isn't a lot to connect them and the styles are varied, being (apparently): Anti-folk, Indie Rock, Post-rock and Experimental Rock. Apparently, one sounds like Nick Cave and Bauhaus – if only!",
     genres: ["Anti-folk", "Indie Rock", "Post-rock", "Experimental Rock"],
     artwork: "/images/finally/Finally EP cover.png",
-    artworkNote: "Artwork for EP cover to be added when finalised"
+    artworkNote: "Artwork for EP cover to be added when finalised",
+    spotifyAlbumId: "66bfHJTmVUhlLFd0stFtvZ",
+    spotifyUrl: "https://open.spotify.com/album/66bfHJTmVUhlLFd0stFtvZ"
   },
   influences: {
     intro:
@@ -159,10 +161,11 @@ export const siteConfig = {
     punchline: "And I remember - I PAID these people"
   },
   streamingLinks: {
-    spotify: "https://open.spotify.com/artist/0gXu1oMsNf8fnRY0NPCoSw",
-    soundcloud: "https://soundcloud.com/PLACEHOLDER-TBC",
-    itunes: "https://music.apple.com/artist/PLACEHOLDER-TBC",
-    amazonMusic: "https://music.amazon.co.uk/artists/PLACEHOLDER-TBC"
+    spotify: "https://open.spotify.com/artist/3Ox1AnO3ixuss0xjcfGdId",
+    soundcloud: null,
+    itunes: null,
+    amazonMusic: null,
+    pendingTooltip: "Go find it yourself"
   },
   spotifyEmbed: {
     artistId: "PLACEHOLDER_ID",

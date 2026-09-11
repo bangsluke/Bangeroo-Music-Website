@@ -23,6 +23,10 @@ describe("site config shape", () => {
     expect(siteConfig).toHaveProperty("ep");
     expect(siteConfig.ep.genres).toHaveLength(4);
     expect(siteConfig.ep.artwork).toBe("/images/finally/Finally EP cover.png");
+    expect(siteConfig.ep.spotifyAlbumId).toBe("66bfHJTmVUhlLFd0stFtvZ");
+    expect(siteConfig.ep.spotifyUrl).toBe(
+      "https://open.spotify.com/album/66bfHJTmVUhlLFd0stFtvZ"
+    );
     expect(siteConfig).toHaveProperty("influences");
     expect(siteConfig.influences.artists).toHaveLength(20);
     expect(siteConfig).toHaveProperty("credits");
@@ -34,6 +38,16 @@ describe("site config shape", () => {
     expect(siteConfig.reviews).toHaveProperty("punchline");
     expect(siteConfig.reviews.positive).toHaveLength(9);
     expect(siteConfig.reviews.negative).toHaveLength(8);
+  });
+
+  it("keeps Spotify live and marks other streaming links as pending", () => {
+    expect(siteConfig.streamingLinks.spotify).toMatch(
+      /^https:\/\/open\.spotify\.com\/artist\//
+    );
+    expect(siteConfig.streamingLinks.soundcloud).toBeNull();
+    expect(siteConfig.streamingLinks.itunes).toBeNull();
+    expect(siteConfig.streamingLinks.amazonMusic).toBeNull();
+    expect(siteConfig.streamingLinks.pendingTooltip).toBe("Go find it yourself");
   });
 
   it("includes Spotify URLs for every influence artist", () => {

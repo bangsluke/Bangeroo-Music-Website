@@ -3,17 +3,100 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bangeroo | Official Site - Finally EP</title>
     <meta
       name="description"
-      content="Bangeroo: music is magical. Listen to the Finally EP, browse influences, and enter if you dare."
+      content="Bangeroo official site. Stream the Finally EP — Anti-folk, Indie Rock, Post-rock and Experimental Rock. Enter if you dare."
     />
-    <meta property="og:title" content="Bangeroo" />
+    <meta name="author" content="Bangeroo" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="canonical" href="https://bangeroo.net/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Bangeroo" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:url" content="https://bangeroo.net/" />
+    <meta property="og:title" content="Bangeroo | Official Site - Finally EP" />
     <meta
       property="og:description"
-      content="Bangeroo shares songs across Anti-folk, Indie Rock, Post-rock and Experimental Rock. Enter if you dare."
+      content="Bangeroo shares songs across Anti-folk, Indie Rock, Post-rock and Experimental Rock. Stream the Finally EP. Enter if you dare."
     />
-    <meta property="og:image" content="/Bangeroo-Site-Logo.png" />
-    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://bangeroo.net/Bangeroo-Music-Website.png" />
+    <meta property="og:image:width" content="1871" />
+    <meta property="og:image:height" content="983" />
+    <meta property="og:image:alt" content="Bangeroo music website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Bangeroo | Official Site - Finally EP" />
+    <meta
+      name="twitter:description"
+      content="Bangeroo shares songs across Anti-folk, Indie Rock, Post-rock and Experimental Rock. Stream the Finally EP. Enter if you dare."
+    />
+    <meta name="twitter:image" content="https://bangeroo.net/Bangeroo-Music-Website.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "MusicGroup",
+            "@id": "https://bangeroo.net/#artist",
+            "name": "Bangeroo",
+            "url": "https://bangeroo.net/",
+            "image": "https://bangeroo.net/Bangeroo-Music-Website.png",
+            "genre": ["Anti-folk", "Indie Rock", "Post-rock", "Experimental Rock"],
+            "sameAs": ["https://open.spotify.com/artist/0gXu1oMsNf8fnRY0NPCoSw"]
+          },
+          {
+            "@type": "MusicAlbum",
+            "@id": "https://bangeroo.net/#finally-ep",
+            "name": "Finally",
+            "albumProductionType": "https://schema.org/EPRelease",
+            "byArtist": { "@id": "https://bangeroo.net/#artist" },
+            "url": "https://open.spotify.com/album/66bfHJTmVUhlLFd0stFtvZ",
+            "image": "https://bangeroo.net/images/finally/Finally%20EP%20cover.png",
+            "datePublished": "2026-09-11",
+            "numTracks": 4,
+            "track": [
+              {
+                "@type": "MusicRecording",
+                "name": "Re-Wilding",
+                "position": 1,
+                "byArtist": { "@id": "https://bangeroo.net/#artist" }
+              },
+              {
+                "@type": "MusicRecording",
+                "name": "Real",
+                "position": 2,
+                "byArtist": { "@id": "https://bangeroo.net/#artist" }
+              },
+              {
+                "@type": "MusicRecording",
+                "name": "It's Not Fair",
+                "position": 3,
+                "byArtist": { "@id": "https://bangeroo.net/#artist" }
+              },
+              {
+                "@type": "MusicRecording",
+                "name": "Crashlanding",
+                "position": 4,
+                "byArtist": { "@id": "https://bangeroo.net/#artist" }
+              }
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://bangeroo.net/#website",
+            "name": "Bangeroo",
+            "url": "https://bangeroo.net/",
+            "publisher": { "@id": "https://bangeroo.net/#artist" },
+            "description": "Official Bangeroo website. Stream the Finally EP and explore influences, gallery, and more."
+          }
+        ]
+      }
+    </script>
+
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -24,7 +107,6 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Audiowide&family=VT323&display=swap"
     />
-    <title>Bangeroo</title>
 
     <link rel="stylesheet" href="./css/theme.css" />
     <link rel="stylesheet" href="./css/reset.css" />
@@ -152,6 +234,9 @@
         <h1 class="hero-logo logo-click-target" id="hero-logo" aria-label="BANG EROO">
           <span class="hero-logo-line hero-logo-line--top">BANG</span>
           <span class="hero-logo-line hero-logo-line--bottom">EROO</span>
+          <span class="visually-hidden"
+            >Bangeroo — official site for the Finally EP</span
+          >
         </h1>
         <p class="hero-bio" id="hero-bio">
           Music is magical. Greedily listening to pretty much anything that is good

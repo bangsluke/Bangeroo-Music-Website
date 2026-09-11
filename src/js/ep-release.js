@@ -18,7 +18,7 @@ function renderArtwork(ep) {
   return placeholder;
 }
 
-function renderTracklist(trackList = tracks) {
+function renderTracklist(trackList = tracks, ep = null) {
   const list = document.createElement("ol");
   list.className = "ep-release__tracklist";
   list.setAttribute("aria-label", "EP track listing");
@@ -42,14 +42,39 @@ function renderTracklist(trackList = tracks) {
     list.append(item);
   });
 
+  const spotifyCta = renderSpotifyCta(ep);
+  if (spotifyCta) {
+    list.append(spotifyCta);
+  }
+
   return list;
 }
 
 function renderCoverRow(ep, trackList = tracks) {
   const row = document.createElement("div");
   row.className = "ep-release__cover-row";
-  row.append(renderArtwork(ep), renderTracklist(trackList));
+  row.append(renderArtwork(ep), renderTracklist(trackList, ep));
   return row;
+}
+
+function renderSpotifyCta(ep) {
+  if (!ep?.spotifyUrl) {
+    return null;
+  }
+
+  const item = document.createElement("li");
+  item.className = "ep-release__track--spotify";
+
+  const cta = document.createElement("a");
+  cta.className = "ep-release__spotify-cta";
+  cta.href = ep.spotifyUrl;
+  cta.target = "_blank";
+  cta.rel = "noopener noreferrer";
+  cta.setAttribute("data-umami-event", "ep-spotify-click");
+  cta.textContent = `Listen to ${ep.title || "Finally"} on Spotify`;
+
+  item.append(cta);
+  return item;
 }
 
 function renderEpRelease(contentMount, ep, trackList = tracks) {
@@ -101,5 +126,6 @@ export const __testables__ = {
   renderEpRelease,
   renderArtwork,
   renderTracklist,
-  renderCoverRow
+  renderCoverRow,
+  renderSpotifyCta
 };

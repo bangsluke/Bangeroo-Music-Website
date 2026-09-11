@@ -389,10 +389,30 @@ function applySiteConfig(config) {
 
   streamingLinks.forEach((link) => {
     const key = link.getAttribute("data-streaming-link");
-    if (!key || !config.streamingLinks[key]) {
+    if (!key || key === "pendingTooltip") {
       return;
     }
-    link.setAttribute("href", config.streamingLinks[key]);
+
+    const url = config.streamingLinks[key];
+    const pendingTooltip =
+      config.streamingLinks.pendingTooltip || "Go find it yourself";
+    const baseLabel = link.getAttribute("aria-label") || key;
+
+    if (url) {
+      link.setAttribute("href", url);
+      link.classList.remove("streaming-link--pending");
+      link.removeAttribute("data-tooltip");
+      link.removeAttribute("aria-disabled");
+      link.removeAttribute("tabindex");
+      return;
+    }
+
+    link.removeAttribute("href");
+    link.classList.add("streaming-link--pending");
+    link.setAttribute("data-tooltip", pendingTooltip);
+    link.setAttribute("aria-disabled", "true");
+    link.setAttribute("tabindex", "0");
+    link.setAttribute("aria-label", `${baseLabel} - ${pendingTooltip}`);
   });
 }
 

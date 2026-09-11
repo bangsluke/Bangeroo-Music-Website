@@ -114,4 +114,40 @@ describe("ep release section", () => {
       "d"
     );
   });
+
+  it("omits Spotify CTA when album URL is missing", () => {
+    initEpRelease({ ep: baseEp });
+
+    expect(document.querySelector(".ep-release__spotify-cta")).toBeNull();
+    expect(document.querySelector(".ep-release__track--spotify")).toBeNull();
+    expect(document.querySelector(".ep-release__spotify-embed")).toBeNull();
+  });
+
+  it("renders Spotify CTA as a fifth track-list row when configured", () => {
+    initEpRelease({
+      ep: {
+        ...baseEp,
+        spotifyAlbumId: "66bfHJTmVUhlLFd0stFtvZ",
+        spotifyUrl: "https://open.spotify.com/album/66bfHJTmVUhlLFd0stFtvZ"
+      }
+    });
+
+    const list = document.querySelector(".ep-release__tracklist");
+    const spotifyRow = document.querySelector(".ep-release__track--spotify");
+    const cta = document.querySelector(".ep-release__spotify-cta");
+
+    expect(list).not.toBeNull();
+    expect(spotifyRow).not.toBeNull();
+    expect(list.contains(spotifyRow)).toBe(true);
+    expect(document.querySelector(".ep-release__spotify-embed")).toBeNull();
+
+    expect(cta).not.toBeNull();
+    expect(cta.getAttribute("href")).toBe(
+      "https://open.spotify.com/album/66bfHJTmVUhlLFd0stFtvZ"
+    );
+    expect(cta.getAttribute("target")).toBe("_blank");
+    expect(cta.getAttribute("rel")).toBe("noopener noreferrer");
+    expect(cta.getAttribute("data-umami-event")).toBe("ep-spotify-click");
+    expect(cta.textContent).toBe("Listen to Finally on Spotify");
+  });
 });

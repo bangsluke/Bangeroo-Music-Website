@@ -33,9 +33,10 @@ const DEFAULT_CONFIG = {
   },
   streamingLinks: {
     spotify: "https://open.spotify.com/artist/PLACEHOLDER_ID",
-    soundcloud: "https://soundcloud.com/PLACEHOLDER",
-    itunes: "https://music.apple.com/artist/PLACEHOLDER",
-    amazonMusic: "https://music.amazon.co.uk/artists/PLACEHOLDER"
+    soundcloud: null,
+    itunes: null,
+    amazonMusic: null,
+    pendingTooltip: "Go find it yourself"
   },
   spotifyEmbed: {
     artistId: "PLACEHOLDER_ID",
